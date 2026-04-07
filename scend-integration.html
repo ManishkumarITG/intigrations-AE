@@ -1,10 +1,10 @@
-                    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dispatch Lab Integration — Account Editor Help Center</title>
+  <title>Scend Integration — Account Editor Help Center</title>
   <style>
     * {
       box-sizing: border-box;
@@ -441,22 +441,22 @@
       <a href="#">3PL Integrations</a>
     </div>
 
-    <h1 class="article-title">Dispatch Lab Integration &mdash; Shopify Order Editing Sync (Account Editor)</h1>
+    <h1 class="article-title">Scend Integration &mdash; Shopify Edited Order Sync (Account Editor)</h1>
     <div class="article-meta">3PL Integrations &nbsp;&bull;&nbsp; Last updated: April 2026</div>
 
     <!-- PURPOSE -->
-    <p>This guide helps merchants using <strong>Dispatch Lab</strong> understand how to configure the integration so that Account Editor order edits are always reflected correctly. Dispatch Lab <strong>does not read live edits</strong> &mdash; orders must be fully finalized before Dispatch Lab downloads them.</p>
+    <p>This guide helps merchants using <strong>Scend</strong> understand how to configure the integration so that Account Editor order edits are always reflected correctly. Scend <strong>does not read live edits</strong> &mdash; orders must be fully finalized before Scend downloads them.</p>
 
     <div class="callout warning">
       <span class="callout-icon">&#x26A0;&#xFE0F;</span>
-      <div><strong>Important:</strong> Unlike some other 3PLs, Dispatch Lab uses a <strong>Account Editor Master Flow</strong>. Instead of manually capturing payment per order, a Shopify Flow automation handles the capture after a configurable grace period.</div>
+      <div><strong>Important:</strong> Scend uses the <strong>Account Editor Master Flow</strong> to delay order downloads. Payment is held in <code>Authorized</code> state while customers edit, then the Flow captures payment automatically after the grace period &mdash; triggering Scend to download the finalized order.</div>
     </div>
 
     <hr class="divider">
 
     <!-- HOW IT WORKS -->
     <div class="section-heading"><span>&#x1F504;</span> How the Integration Works</div>
-    <p>Dispatch Lab downloads orders from Shopify only when payment status is <strong>&ldquo;Paid&rdquo;</strong>. The Account Editor Master Flow creates a grace period between order creation and payment capture &mdash; giving you time to edit the order in Account Editor before Dispatch Lab ever sees it.</p>
+    <p>Scend downloads orders from Shopify only when payment status is <strong>&ldquo;Paid&rdquo;</strong>. The Account Editor Master Flow creates a grace period between order creation and payment capture &mdash; giving you time to edit the order in Account Editor before Scend ever sees it.</p>
 
     <div class="flow-card">
       <div class="flow-step">
@@ -470,8 +470,8 @@
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">3</span>Dispatch Lab Skips the Order</div>
-        <p>Because payment status is still <code>Authorized</code>, <strong>Dispatch Lab does not download the order</strong>. The order is invisible to Dispatch Lab during the entire editing window.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">3</span>Scend Skips the Order</div>
+        <p>Because payment status is still <code>Authorized</code>, <strong>Scend does not download the order</strong>. The order is invisible to Scend during the entire editing window.</p>
       </div>
 
       <div class="flow-step">
@@ -480,8 +480,8 @@
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">5</span>Dispatch Lab Downloads</div>
-        <p>Dispatch Lab sees the order for the first time with <strong>all edits already included</strong> &mdash; correct items, quantities, and totals.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">5</span>Scend Downloads</div>
+        <p>Scend sees the order for the first time with <strong>all edits already included</strong> &mdash; correct items, quantities, and totals.</p>
       </div>
     </div>
 
@@ -492,25 +492,20 @@
 
     <!-- STEP 1 — Payment Capture Setting -->
     <div class="step-card">
-      <div class="step-card-header">&#x1F4CB; Step 1 &mdash; Change Payment Capture Setting in Shopify</div>
+      <div class="step-card-header">&#x1F4CB; Step 1 &mdash; Enable Manual Payment Capture in Shopify</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
-      <p>Set Shopify to capture payment <strong>automatically after fulfillment</strong>. This prevents immediate capture at checkout and lets the Shopify Flow control exactly when payment is captured.</p>
+      <p>Set Shopify to hold payment in <strong>Authorized</strong> state so Scend cannot import the order until editing is complete and payment is captured.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>Log in to <strong>Shopify Admin</strong></li>
         <li><span class="step-num">2</span>Go to <strong>Settings &rarr; Payments</strong></li>
         <li><span class="step-num">3</span>Scroll down to <strong>Payment capture method</strong></li>
-        <li><span class="step-num">4</span>Select <strong>&ldquo;Automatically when the order is fulfilled&rdquo;</strong></li>
+        <li><span class="step-num">4</span>Select <strong>&ldquo;Manually capture payment for orders&rdquo;</strong></li>
         <li><span class="step-num">5</span>Click <strong>Save</strong></li>
       </ol>
 
-      <div class="callout note">
-        <span class="callout-icon">&#x1F4DD;</span>
-        <div><strong>Why not &ldquo;Manually&rdquo;?</strong> With the Dispatch Lab integration, the Shopify Flow handles the delayed capture automatically. Setting it to &ldquo;Automatically after fulfillment&rdquo; ensures that orders not covered by the Flow (e.g., POS orders) are still captured at the right time.</div>
-      </div>
-
       <div class="callout warning">
         <span class="callout-icon">&#x26A0;&#xFE0F;</span>
-        <div><strong>7-day limit:</strong> Shopify Payments authorizations expire after 7 days. Make sure your grace period is well within this window (recommended: 30 minutes to 2 hours).</div>
+        <div><strong>7-day limit:</strong> Shopify Payments authorizations expire after 7 days. Always capture payment within this window after editing is complete.</div>
       </div>
     </div>
 
@@ -518,7 +513,7 @@
     <div class="step-card">
       <div class="step-card-header">&#x26A1; Step 2 &mdash; Import the Account Editor Master Flow</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
-      <p>The Account Editor Master Flow is a pre-built Shopify Flow automation that holds payment capture for a configurable grace period, then captures automatically &mdash; triggering Dispatch Lab to download the finalized order.</p>
+      <p>The Account Editor Master Flow is a pre-built Shopify Flow automation that holds payment capture for a configurable grace period, then captures automatically &mdash; triggering Scend to download the finalized order.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>Download the <strong>Account Editor Master Flow</strong> file (provided with this guide)</li>
         <li><span class="step-num">2</span>In Shopify Admin, go to <strong>Apps &rarr; Shopify Flow</strong></li>
@@ -535,18 +530,18 @@
 
       <div class="callout note">
         <span class="callout-icon">&#x1F4DD;</span>
-        <div><strong>How the Flow works:</strong> When a new order is created, the Flow waits for the configured grace period. After the wait, it automatically captures payment &mdash; changing the status from <code>Authorized</code> to <code>Paid</code>. Dispatch Lab then downloads the order with all edits included.</div>
+        <div><strong>How the Flow works:</strong> When a new order is created, the Flow waits for the configured grace period. After the wait, it automatically captures payment &mdash; changing the status from <code>Authorized</code> to <code>Paid</code>. Scend then downloads the order with all edits included.</div>
       </div>
     </div>
 
     <!-- STEP 3 — Disable Shipping Methods -->
     <div class="step-card">
-      <div class="step-card-header">&#x1F6AB; Step 3 &mdash; Disable Shipping Methods App Block in Order Editing</div>
-      <div class="step-card-sub">&#x26A0;&#xFE0F; Required &mdash; Dispatch Lab Limitation</div>
-      <p>Dispatch Lab <strong>does not support shipping method changes</strong> during the editing window. To prevent customer confusion, you must disable the Shipping Methods App Block in the Account Editor / Order Editing settings.</p>
+      <div class="step-card-header">&#x1F6AB; Step 3 &mdash; Disable Shipping Methods App Block in Account Editor</div>
+      <div class="step-card-sub">&#x26A0;&#xFE0F; Required &mdash; Scend Limitation</div>
+      <p>Scend <strong>does not support shipping method changes</strong> during the editing window. To prevent customer confusion, you must disable the Shipping Methods App Block in Account Editor settings.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>Open your <strong>Account Editor</strong> app settings in Shopify Admin</li>
-        <li><span class="step-num">2</span>Navigate to the <strong>App Blocks</strong> or <strong>Order Editing</strong> configuration</li>
+        <li><span class="step-num">2</span>Navigate to the <strong>App Blocks</strong> configuration</li>
         <li><span class="step-num">3</span>Find the <strong>Shipping Methods App Block</strong></li>
         <li><span class="step-num">4</span>Set it to <strong>Disabled</strong></li>
         <li><span class="step-num">5</span>Click <strong>Save</strong></li>
@@ -554,7 +549,7 @@
 
       <div class="callout danger">
         <span class="callout-icon">&#x1F6D1;</span>
-        <div><strong>Do not skip this step.</strong> If the Shipping Methods App Block is left enabled, customers may attempt to change their shipping method during the editing window. Dispatch Lab will not reflect these changes, leading to incorrect shipping and customer complaints.</div>
+        <div><strong>Do not skip this step.</strong> If the Shipping Methods App Block is left enabled, customers may attempt to change their shipping method during the editing window. Scend will not reflect these changes, leading to incorrect shipping and customer complaints.</div>
       </div>
     </div>
 
@@ -578,14 +573,14 @@
 
     <!-- STEP 5 — Workflow -->
     <div class="step-card">
-      <div class="step-card-header">&#x270F;&#xFE0F; Step 5 &mdash; Your Order Editing Workflow</div>
+      <div class="step-card-header">&#x270F;&#xFE0F; Step 5 &mdash; Your Account Editor Workflow</div>
       <div class="step-card-sub">&#x2705; How Every Order Works After Setup</div>
       <p>Once setup is complete, this is the automated flow for every order:</p>
       <ol class="steps-list">
-        <li><span class="step-num">1</span>New order arrives &rarr; Payment = <strong>Authorized</strong> <em>(Dispatch Lab does not see it &#x2705;)</em></li>
+        <li><span class="step-num">1</span>New order arrives &rarr; Payment = <strong>Authorized</strong> <em>(Scend does not see it &#x2705;)</em></li>
         <li><span class="step-num">2</span>Grace period active &rarr; Customer can edit in <strong>Account Editor</strong> &mdash; add/remove items, change quantities, update address</li>
         <li><span class="step-num">3</span>Grace period expires &rarr; Shopify Flow <strong>automatically captures payment</strong></li>
-        <li><span class="step-num">4</span>Payment becomes <strong>Paid</strong> &rarr; Dispatch Lab downloads the finalized order &#x2705;</li>
+        <li><span class="step-num">4</span>Payment becomes <strong>Paid</strong> &rarr; Scend downloads the finalized order &#x2705;</li>
         <li><span class="step-num">5</span>Order is shipped with <strong>all edits included</strong> &mdash; no manual intervention needed</li>
       </ol>
 
@@ -593,7 +588,7 @@
       <div class="step-card-sub" style="margin-bottom:10px">&#x1F504; What Happens After This Setup</div>
       <ul class="check-list">
         <li><span class="chk">&#x2705;</span>Correct order total &mdash; removed items not counted</li>
-        <li><span class="chk">&#x2705;</span>Added items appear correctly in Dispatch Lab</li>
+        <li><span class="chk">&#x2705;</span>Added items appear correctly in Scend</li>
         <li><span class="chk">&#x2705;</span>Quantity changes reflected accurately</li>
         <li><span class="chk">&#x2705;</span>Address changes included in the download</li>
         <li><span class="chk">&#x2705;</span>No manual payment capture needed &mdash; fully automated</li>
@@ -601,7 +596,7 @@
 
       <div class="callout success">
         <span class="callout-icon">&#x2705;</span>
-        <div><strong>Setup complete!</strong> Dispatch Lab will always receive the final, correctly edited order. The entire flow is automated &mdash; no manual capture or Dispatch Lab configuration required.</div>
+        <div><strong>Setup complete!</strong> Scend will always receive the final, correctly edited order. The entire flow is automated &mdash; no manual capture or Scend configuration required.</div>
       </div>
     </div>
 
@@ -621,7 +616,7 @@
         <tr>
           <td><strong>Shopify</strong> &rarr; Settings &rarr; Payments</td>
           <td>Payment capture method</td>
-          <td><code>Automatically when the order is fulfilled</code></td>
+          <td><code>Manually capture payment for orders</code></td>
         </tr>
         <tr>
           <td><strong>Shopify</strong> &rarr; Apps &rarr; Shopify Flow</td>
@@ -647,11 +642,11 @@
     <div class="section-heading"><span>&#x1F9EA;</span> Testing Checklist</div>
     <p>Before going live, run through this checklist to confirm everything works correctly:</p>
     <ul class="check-list">
-      <li><span class="chk">&#x2705;</span>Place a test order &mdash; verify it does <strong>not</strong> appear in Dispatch Lab immediately</li>
+      <li><span class="chk">&#x2705;</span>Place a test order &mdash; verify it does <strong>not</strong> appear in Scend immediately</li>
       <li><span class="chk">&#x2705;</span>Make edits during the editing window &mdash; add/remove items, change address</li>
       <li><span class="chk">&#x2705;</span>Wait for the grace period to expire</li>
       <li><span class="chk">&#x2705;</span>Confirm payment is captured automatically by the Flow</li>
-      <li><span class="chk">&#x2705;</span>Confirm order appears in Dispatch Lab with <strong>all edits included</strong></li>
+      <li><span class="chk">&#x2705;</span>Confirm order appears in Scend with <strong>all edits included</strong></li>
       <li><span class="chk">&#x2705;</span>Verify shipping method changes are <strong>blocked</strong> (App Block disabled)</li>
     </ul>
 
@@ -669,9 +664,9 @@
       </thead>
       <tbody>
         <tr>
-          <td>Orders appearing in Dispatch Lab too early</td>
-          <td>Payment capture set to &ldquo;Automatically at checkout&rdquo; or Flow not activated</td>
-          <td>Verify payment capture = &ldquo;Automatically after fulfillment&rdquo; and the Account Editor Master Flow is <strong>Active</strong></td>
+          <td>Orders appearing in Scend too early</td>
+          <td>Payment capture not set to Manual, or Flow not activated</td>
+          <td>Verify payment capture = &ldquo;Manually capture payment for orders&rdquo; and the Account Editor Master Flow is <strong>Active</strong></td>
         </tr>
         <tr>
           <td>Orders not appearing after grace period</td>
@@ -679,9 +674,9 @@
           <td>Open Shopify Flow &rarr; check the run history for errors &rarr; re-import if needed</td>
         </tr>
         <tr>
-          <td>Edits not reflected in Dispatch Lab</td>
+          <td>Edits not reflected in Scend</td>
           <td>Edits were made after the grace period ended</td>
-          <td>Ensure all edits are completed <strong>before</strong> the grace period expires &mdash; Dispatch Lab does not read live edits</td>
+          <td>Ensure all edits are completed <strong>before</strong> the grace period expires &mdash; Scend does not read live edits</td>
         </tr>
         <tr>
           <td>Customer changed shipping method</td>
@@ -702,7 +697,7 @@
     <div class="section-heading"><span>&#x1F9E0;</span> Best Practices</div>
     <ul class="bullet-list">
       <li>Keep the grace period short &mdash; <strong>30 minutes to 2 hours</strong> is ideal for most stores</li>
-      <li>Always <strong>disable the Shipping Methods App Block</strong> &mdash; Dispatch Lab cannot process shipping changes</li>
+      <li>Always <strong>disable the Shipping Methods App Block</strong> &mdash; Scend cannot process shipping changes</li>
       <li>Sync the editing deadline in Account Editor with the Flow timing so customers see an accurate countdown</li>
       <li>Monitor Shopify Flow run history after launch to confirm payment captures are firing correctly</li>
       <li>Test the full flow end-to-end before going live with real orders</li>
