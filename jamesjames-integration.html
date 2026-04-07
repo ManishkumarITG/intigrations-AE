@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Malpha 3PL Integration — Account Editor Help Center</title>
+  <title>James &amp; James Integration — Account Editor Help Center</title>
   <style>
     * {
       box-sizing: border-box;
@@ -441,47 +441,57 @@
       <a href="#">3PL Integrations</a>
     </div>
 
-    <h1 class="article-title">Malpha 3PL Integration &mdash; Shopify Edited Order Sync (Account Editor)</h1>
+    <h1 class="article-title">James &amp; James Integration &mdash; Shopify Edited Order Sync (Account Editor)</h1>
     <div class="article-meta">3PL Integrations &nbsp;&bull;&nbsp; Last updated: April 2026</div>
 
     <!-- PURPOSE -->
-    <p>This guide helps merchants using <strong>Malpha 3PL</strong> understand how to configure the integration so that Account Editor order edits are always reflected correctly. Malpha 3PL <strong>does not read live edits</strong> &mdash; orders must be fully finalized before Malpha 3PL downloads them.</p>
+    <p>This guide helps merchants using <strong>James &amp; James</strong> (3PL/WMS (Third-Party Logistics / Warehouse Management System)) understand how to configure the integration so that Account Editor order edits are always reflected correctly. James &amp; James <strong>does not read live edits</strong> &mdash; order changes must be synced before James &amp; James downloads the order.</p>
 
     <div class="callout warning">
       <span class="callout-icon">&#x26A0;&#xFE0F;</span>
-      <div><strong>Important:</strong> Malpha 3PL uses the <strong>Account Editor Delayed Master Flow</strong> to delay order downloads. Payment is held in <code>Authorized</code> state while customers edit, then the Flow captures payment automatically after the grace period &mdash; triggering Malpha 3PL to download the finalized order.</div>
+      <div><strong>Important:</strong> James &amp; James uses the <strong>Account Editor Delayed Master Flow</strong> to delay order downloads. Payment is held in <code>Authorized</code> state while customers edit, then the Flow captures payment automatically after the grace period &mdash; triggering James &amp; James to download the finalized order.</div>
     </div>
 
     <hr class="divider">
 
     <!-- HOW IT WORKS -->
     <div class="section-heading"><span>&#x1F504;</span> How the Integration Works</div>
-    <p>Malpha 3PL downloads orders from Shopify only when payment status is <strong>&ldquo;Paid&rdquo;</strong>. The Account Editor Delayed Master Flow creates a grace period between order creation and payment capture &mdash; giving you time to edit the order in Account Editor before Malpha 3PL ever sees it.</p>
+    <p>James &amp; James downloads orders from Shopify only when payment status is <strong>&ldquo;Paid&rdquo;</strong>. The Account Editor Delayed Master Flow creates a grace period between order creation and payment capture &mdash; giving you time to edit the order in Account Editor before James &amp; James ever sees it.</p>
 
     <div class="flow-card">
       <div class="flow-step">
         <div class="flow-step-heading"><span class="flow-step-num">1</span>Order Created</div>
-        <p>Customer places an order &rarr; Payment is <strong>Authorized</strong> (not yet captured).</p>
+        <p>Customer completes checkout &rarr; Order is created in Shopify.</p>
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">2</span>Grace Period Active</div>
-        <p>The editing window opens. Customer or merchant can edit the order in <strong>Account Editor</strong> &mdash; add items, remove items, change quantities, update address.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">2</span>Payment Authorized</div>
+        <p>Payment status remains <strong>&ldquo;Authorized&rdquo;</strong> (not &ldquo;Paid&rdquo;). The payment is held but not captured.</p>
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">3</span>Malpha 3PL Skips the Order</div>
-        <p>Because payment status is still <code>Authorized</code>, <strong>Malpha 3PL does not download the order</strong>. The order is invisible to Malpha 3PL during the entire editing window.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">3</span>Grace Period Active</div>
+        <p>The editing window opens (e.g., 30 minutes). Customer can edit the order in <strong>Account Editor</strong> &mdash; add items, remove items, change quantities, apply discount codes, update address.</p>
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">4</span>Grace Period Ends</div>
-        <p>Shopify Flow automatically captures payment &rarr; Status updates to <strong>Paid</strong>.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">4</span>James &amp; James Does Not Download</div>
+        <p>Because payment status is still <code>Authorized</code>, <strong>James &amp; James does not see the order</strong>. The order is completely invisible to James &amp; James during the entire editing window.</p>
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">5</span>Malpha 3PL Downloads</div>
-        <p>Malpha 3PL sees the order for the first time with <strong>all edits already included</strong> &mdash; correct items, quantities, and totals.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">5</span>Grace Period Ends</div>
+        <p>The editing window expires. No further customer edits are accepted.</p>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-heading"><span class="flow-step-num">6</span>Payment Captured</div>
+        <p>Account Editor Delayed Master Flow automatically captures the payment. Order status updates to <strong>&ldquo;Paid&rdquo;</strong>.</p>
+      </div>
+
+      <div class="flow-step">
+        <div class="flow-step-heading"><span class="flow-step-num">7</span>James &amp; James Downloads Order</div>
+        <p>James &amp; James sees the order for the first time with <strong>all edits already included</strong> &mdash; correct items, quantities, discounts, and totals.</p>
       </div>
     </div>
 
@@ -494,7 +504,7 @@
     <div class="step-card">
       <div class="step-card-header">&#x1F4CB; Step 1 &mdash; Enable Manual Payment Capture in Shopify</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
-      <p>Set Shopify to hold payment in <strong>Authorized</strong> state so Malpha 3PL cannot import the order until editing is complete and payment is captured.</p>
+      <p>Set Shopify to hold payment in <strong>Authorized</strong> state so James &amp; James cannot import the order until editing is complete and payment is captured.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>Log in to <strong>Shopify Admin</strong></li>
         <li><span class="step-num">2</span>Go to <strong>Settings &rarr; Payments</strong></li>
@@ -513,7 +523,7 @@
     <div class="step-card">
       <div class="step-card-header">&#x26A1; Step 2 &mdash; Import the Account Editor Delayed Master Flow</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
-      <p>The Account Editor Delayed Master Flow is a pre-built Shopify Flow automation that holds payment capture for a configurable grace period, then captures automatically &mdash; triggering Malpha 3PL to download the finalized order.</p>
+      <p>The Account Editor Delayed Master Flow is a pre-built Shopify Flow automation that holds payment capture for a configurable grace period, then captures automatically &mdash; triggering James &amp; James to download the finalized order.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>Download the <strong>Account Editor Delayed Master Flow</strong> file (provided with this guide)</li>
         <li><span class="step-num">2</span>In Shopify Admin, go to <strong>Apps &rarr; Shopify Flow</strong></li>
@@ -530,26 +540,48 @@
 
       <div class="callout note">
         <span class="callout-icon">&#x1F4DD;</span>
-        <div><strong>How the Flow works:</strong> When a new order is created, the Flow waits for the configured grace period. After the wait, it automatically captures payment &mdash; changing the status from <code>Authorized</code> to <code>Paid</code>. Malpha 3PL then downloads the order with all edits included.</div>
+        <div><strong>How the Flow works:</strong> When a new order is created, the Flow waits for the configured grace period. After the wait, it automatically captures payment &mdash; changing the status from <code>Authorized</code> to <code>Paid</code>. James &amp; James then downloads the order with all edits included.</div>
       </div>
     </div>
 
-    <!-- STEP 3 — Disable Shipping Methods -->
+    <!-- STEP 3 — Contact James & James Support -->
     <div class="step-card">
-      <div class="step-card-header">&#x1F6AB; Step 3 &mdash; Disable Shipping Methods App Block in Account Editor</div>
-      <div class="step-card-sub">&#x26A0;&#xFE0F; Required &mdash; Malpha 3PL Limitation</div>
-      <p>Malpha 3PL <strong>does not support shipping method changes</strong> during the editing window. To prevent customer confusion, you must disable the Shipping Methods App Block in Account Editor settings.</p>
-      <ol class="steps-list">
-        <li><span class="step-num">1</span>Open your <strong>Account Editor</strong> app settings in Shopify Admin</li>
-        <li><span class="step-num">2</span>Navigate to the <strong>App Blocks</strong> configuration</li>
-        <li><span class="step-num">3</span>Find the <strong>Shipping Methods App Block</strong></li>
-        <li><span class="step-num">4</span>Set it to <strong>Disabled</strong></li>
-        <li><span class="step-num">5</span>Click <strong>Save</strong></li>
-      </ol>
+      <div class="step-card-header">&#x1F4E7; Step 3 &mdash; Contact James &amp; James Support</div>
+      <div class="step-card-sub">&#x1F6D1; Critical &mdash; Required for Proper Integration</div>
+      <p>James &amp; James must update your account settings to handle <strong>removed product lines</strong> correctly. Without this configuration, removed items may still appear on pick lists with zero quantity.</p>
 
       <div class="callout danger">
         <span class="callout-icon">&#x1F6D1;</span>
-        <div><strong>Do not skip this step.</strong> If the Shipping Methods App Block is left enabled, customers may attempt to change their shipping method during the editing window. Malpha 3PL will not reflect these changes, leading to incorrect shipping and customer complaints.</div>
+        <div><strong>Do not skip this step.</strong> If James &amp; James does not update this setting, removed items will appear on pick lists with quantity = 0, causing confusion in the warehouse and potential fulfillment errors.</div>
+      </div>
+
+      <p><strong>What to request:</strong> Email your James &amp; James account manager or support team with the following:</p>
+
+      <div style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:18px 20px;margin:14px 0;font-size:14px;line-height:1.7;color:#334155">
+        <p style="margin-bottom:8px"><strong>Subject:</strong> Update Fulfillable Quantity Setting for Order Editing Integration</p>
+        <p style="margin-bottom:10px">Hi James &amp; James Team,</p>
+        <p style="margin-bottom:10px">We&rsquo;ve integrated Order Editing with our Shopify store to allow customers to modify orders post-purchase. To ensure this works correctly with your fulfillment system, we need to update our account settings.</p>
+        <p style="margin-bottom:10px"><strong>Request:</strong> Please update our fulfillable quantity setting to <strong>not download removed product lines</strong> when syncing orders from Shopify.</p>
+        <p style="margin-bottom:10px"><strong>Why this matters:</strong> Customers can remove items during the Order Editing window. When items are removed, the fulfillable quantity becomes zero. We need your system to recognize this and exclude those lines from the pick list.</p>
+        <p style="margin-bottom:6px"><strong>Our setup:</strong></p>
+        <ul style="margin:0 0 10px 20px;padding:0">
+          <li>Store: <em>[Your Shopify store URL]</em></li>
+          <li>Account #: <em>[Your James &amp; James account number]</em></li>
+          <li>Integration: Delayed Payment Capture (orders download only after payment captured)</li>
+        </ul>
+        <p style="margin-bottom:6px"><strong>Expected behavior after this change:</strong></p>
+        <ul style="margin:0 0 10px 20px;padding:0">
+          <li>Customer removes Item A from order</li>
+          <li>Item A fulfillable quantity = 0</li>
+          <li>Order syncs to James &amp; James after editing window</li>
+          <li>Item A does <strong>not</strong> appear on pick list (because quantity = 0)</li>
+        </ul>
+        <p style="margin-bottom:0">Please confirm this setting has been updated and let us know if you need any additional information.</p>
+      </div>
+
+      <div class="callout note">
+        <span class="callout-icon">&#x1F4DD;</span>
+        <div><strong>Wait for confirmation</strong> from James &amp; James before going live. Do not start processing real orders until they confirm the fulfillable quantity setting has been updated on your account.</div>
       </div>
     </div>
 
@@ -577,10 +609,10 @@
       <div class="step-card-sub">&#x2705; How Every Order Works After Setup</div>
       <p>Once setup is complete, this is the automated flow for every order:</p>
       <ol class="steps-list">
-        <li><span class="step-num">1</span>New order arrives &rarr; Payment = <strong>Authorized</strong> <em>(Malpha 3PL does not see it &#x2705;)</em></li>
+        <li><span class="step-num">1</span>New order arrives &rarr; Payment = <strong>Authorized</strong> <em>(James &amp; James does not see it &#x2705;)</em></li>
         <li><span class="step-num">2</span>Grace period active &rarr; Customer can edit in <strong>Account Editor</strong> &mdash; add/remove items, change quantities, update address</li>
         <li><span class="step-num">3</span>Grace period expires &rarr; Shopify Flow <strong>automatically captures payment</strong></li>
-        <li><span class="step-num">4</span>Payment becomes <strong>Paid</strong> &rarr; Malpha 3PL downloads the finalized order &#x2705;</li>
+        <li><span class="step-num">4</span>Payment becomes <strong>Paid</strong> &rarr; James &amp; James downloads the finalized order &#x2705;</li>
         <li><span class="step-num">5</span>Order is shipped with <strong>all edits included</strong> &mdash; no manual intervention needed</li>
       </ol>
 
@@ -588,7 +620,7 @@
       <div class="step-card-sub" style="margin-bottom:10px">&#x1F504; What Happens After This Setup</div>
       <ul class="check-list">
         <li><span class="chk">&#x2705;</span>Correct order total &mdash; removed items not counted</li>
-        <li><span class="chk">&#x2705;</span>Added items appear correctly in Malpha 3PL</li>
+        <li><span class="chk">&#x2705;</span>Added items appear correctly in James &amp; James</li>
         <li><span class="chk">&#x2705;</span>Quantity changes reflected accurately</li>
         <li><span class="chk">&#x2705;</span>Address changes included in the download</li>
         <li><span class="chk">&#x2705;</span>No manual payment capture needed &mdash; fully automated</li>
@@ -596,7 +628,7 @@
 
       <div class="callout success">
         <span class="callout-icon">&#x2705;</span>
-        <div><strong>Setup complete!</strong> Malpha 3PL will always receive the final, correctly edited order. The entire flow is automated &mdash; no manual capture or Malpha 3PL configuration required.</div>
+        <div><strong>Setup complete!</strong> James &amp; James will always receive the final, correctly edited order. The entire flow is automated &mdash; no manual capture or James &amp; James configuration required.</div>
       </div>
     </div>
 
@@ -624,14 +656,14 @@
           <td><strong>Active</strong> &mdash; grace period configured</td>
         </tr>
         <tr>
-          <td><strong>Account Editor</strong> &rarr; App Blocks</td>
-          <td>Shipping Methods App Block</td>
-          <td><strong>Disabled</strong></td>
-        </tr>
-        <tr>
           <td><strong>Account Editor</strong> &rarr; Settings</td>
           <td>Editing Deadline</td>
           <td>Configured (e.g., 30 min)</td>
+        </tr>
+        <tr>
+          <td><strong>James &amp; James</strong></td>
+          <td>Fulfillable quantity setting</td>
+          <td><strong>Updated by J&amp;J support</strong> &mdash; do not download removed product lines (quantity = 0)</td>
         </tr>
       </tbody>
     </table>
@@ -639,16 +671,59 @@
     <hr class="divider">
 
     <!-- TESTING -->
-    <div class="section-heading"><span>&#x1F9EA;</span> Testing Checklist</div>
-    <p>Before going live, run through this checklist to confirm everything works correctly:</p>
-    <ul class="check-list">
-      <li><span class="chk">&#x2705;</span>Place a test order &mdash; verify it does <strong>not</strong> appear in Malpha 3PL immediately</li>
-      <li><span class="chk">&#x2705;</span>Make edits during the editing window &mdash; add/remove items, change address</li>
-      <li><span class="chk">&#x2705;</span>Wait for the grace period to expire</li>
-      <li><span class="chk">&#x2705;</span>Confirm payment is captured automatically by the Flow</li>
-      <li><span class="chk">&#x2705;</span>Confirm order appears in Malpha 3PL with <strong>all edits included</strong></li>
-      <li><span class="chk">&#x2705;</span>Verify shipping method changes are <strong>blocked</strong> (App Block disabled)</li>
-    </ul>
+    <div class="section-heading"><span>&#x1F9EA;</span> Testing Your Integration</div>
+    <p>Before going live, run through <strong>all three test scenarios</strong> and the general flow to confirm James &amp; James integration works correctly.</p>
+
+    <!-- Test 1 -->
+    <div class="step-card">
+      <div class="step-card-header">&#x1F9EA; Test 1 &mdash; Removal of Products</div>
+      <div class="step-card-sub">&#x2705; Verify removed items don&rsquo;t appear in James &amp; James</div>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span>Place a test order with <strong>multiple items</strong></li>
+        <li><span class="step-num">2</span>During the editing window, <strong>remove one or more products</strong></li>
+        <li><span class="step-num">3</span>Wait for the editing period to expire</li>
+        <li><span class="step-num">4</span>Verify James &amp; James receives the order with <strong>correct items only</strong> &mdash; removed products should not appear</li>
+      </ol>
+    </div>
+
+    <!-- Test 2 -->
+    <div class="step-card">
+      <div class="step-card-header">&#x1F9EA; Test 2 &mdash; Addition of Products (Upsell)</div>
+      <div class="step-card-sub">&#x2705; Verify added items appear in James &amp; James</div>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span>Place a test order</li>
+        <li><span class="step-num">2</span>During the editing window, <strong>add a product via upsell</strong></li>
+        <li><span class="step-num">3</span>Complete payment for the additional item</li>
+        <li><span class="step-num">4</span>Wait for the editing period to expire</li>
+        <li><span class="step-num">5</span>Verify James &amp; James shows the added product with <strong>correct quantity</strong></li>
+      </ol>
+    </div>
+
+    <!-- Test 3 -->
+    <div class="step-card">
+      <div class="step-card-header">&#x1F9EA; Test 3 &mdash; Shipping Address Changes</div>
+      <div class="step-card-sub">&#x2705; Verify address updates reflect in James &amp; James</div>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span>Place a test order with <strong>Address A</strong></li>
+        <li><span class="step-num">2</span>During the editing window, <strong>change to Address B</strong></li>
+        <li><span class="step-num">3</span>Wait for the editing period to expire</li>
+        <li><span class="step-num">4</span>Verify James &amp; James shows <strong>Address B</strong> (not Address A) on the shipping label</li>
+      </ol>
+    </div>
+
+    <!-- General Test Flow -->
+    <div class="step-card">
+      <div class="step-card-header">&#x1F4CB; General Test Flow</div>
+      <div class="step-card-sub">&#x2705; End-to-end verification</div>
+      <ul class="check-list">
+        <li><span class="chk">&#x2705;</span>Place a test order &mdash; verify it does <strong>not</strong> appear in James &amp; James immediately</li>
+        <li><span class="chk">&#x2705;</span>Make edits during the editing window &mdash; add/remove items, change address</li>
+        <li><span class="chk">&#x2705;</span>Wait for the editing period to expire</li>
+        <li><span class="chk">&#x2705;</span>Confirm payment is captured automatically by the Flow</li>
+        <li><span class="chk">&#x2705;</span>Confirm order appears in James &amp; James with <strong>all edits included</strong></li>
+        <li><span class="chk">&#x2705;</span>Verify all changes are reflected accurately</li>
+      </ul>
+    </div>
 
     <hr class="divider">
 
@@ -664,7 +739,7 @@
       </thead>
       <tbody>
         <tr>
-          <td>Orders appearing in Malpha 3PL too early</td>
+          <td>Orders appearing in James &amp; James too early</td>
           <td>Payment capture not set to Manual, or Flow not activated</td>
           <td>Verify payment capture = &ldquo;Manually capture payment for orders&rdquo; and the Account Editor Delayed Master Flow is <strong>Active</strong></td>
         </tr>
@@ -674,14 +749,19 @@
           <td>Open Shopify Flow &rarr; check the run history for errors &rarr; re-import if needed</td>
         </tr>
         <tr>
-          <td>Edits not reflected in Malpha 3PL</td>
+          <td>Edits not reflected in James &amp; James</td>
           <td>Edits were made after the grace period ended</td>
-          <td>Ensure all edits are completed <strong>before</strong> the grace period expires &mdash; Malpha 3PL does not read live edits</td>
+          <td>Ensure all edits are completed <strong>before</strong> the grace period expires &mdash; James &amp; James does not read live edits</td>
         </tr>
         <tr>
-          <td>Customer changed shipping method</td>
-          <td>Shipping Methods App Block is still enabled</td>
-          <td>Disable the Shipping Methods App Block in Account Editor settings</td>
+          <td>Removed items still on pick list (quantity = 0)</td>
+          <td>James &amp; James fulfillable quantity setting not updated</td>
+          <td>Contact James &amp; James support &mdash; request they update the setting to exclude zero-quantity lines (see Step 3)</td>
+        </tr>
+        <tr>
+          <td>Shipping address not updated</td>
+          <td>Address changed after grace period ended</td>
+          <td>Ensure address changes are made <strong>during</strong> the editing window before payment is captured</td>
         </tr>
         <tr>
           <td>Authorization expired (no payment captured)</td>
@@ -697,7 +777,7 @@
     <div class="section-heading"><span>&#x1F9E0;</span> Best Practices</div>
     <ul class="bullet-list">
       <li>Keep the grace period short &mdash; <strong>30 minutes to 2 hours</strong> is ideal for most stores</li>
-      <li>Always <strong>disable the Shipping Methods App Block</strong> &mdash; Malpha 3PL cannot process shipping changes</li>
+      <li><strong>Wait for James &amp; James confirmation</strong> before going live &mdash; the fulfillable quantity setting must be updated on your account</li>
       <li>Sync the editing deadline in Account Editor with the Flow timing so customers see an accurate countdown</li>
       <li>Monitor Shopify Flow run history after launch to confirm payment captures are firing correctly</li>
       <li>Test the full flow end-to-end before going live with real orders</li>

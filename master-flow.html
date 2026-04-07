@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Editor Delayed Master Flow — Shopify Flow Automation Reference</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f7f8fa;
+      color: #1a1a2e;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .page-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 40px 24px 80px;
+    }
+
+    .breadcrumb {
+      font-size: 13px;
+      color: #888;
+      margin-bottom: 28px;
+    }
+
+    .breadcrumb a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      margin: 0 6px;
+    }
+
+    .article-title {
+      font-size: 26px;
+      font-weight: 700;
+      color: #111;
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .article-meta {
+      font-size: 13px;
+      color: #667085;
+      margin-bottom: 28px;
+    }
+
+    .section-heading {
+      font-size: 17px;
+      font-weight: 700;
+      color: #111;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: 32px 0 10px;
+    }
+
+    .section-heading .icon {
+      font-size: 18px;
+    }
+
+    .sub-heading {
+      font-size: 15px;
+      font-weight: 700;
+      color: #111;
+      margin: 20px 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    p {
+      margin-bottom: 12px;
+      color: #333;
+    }
+
+    .steps-list {
+      list-style: none;
+      margin: 12px 0 16px;
+      padding: 0;
+    }
+
+    .steps-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: #222;
+      line-height: 1.6;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f8fbff;
+      border: 1px solid #e2e8f0;
+    }
+
+    .step-num {
+      width: 26px;
+      height: 26px;
+      min-width: 26px;
+      border-radius: 50%;
+      background: #1f2937;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .bullet-list {
+      list-style: none;
+      margin: 10px 0 16px;
+      padding: 0;
+    }
+
+    .bullet-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .bullet-list li::before {
+      content: "\2022";
+      color: #555;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .check-list {
+      list-style: none;
+      margin: 10px 0 16px;
+      padding: 0;
+    }
+
+    .check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 15px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .check-list li .chk {
+      width: 24px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #d1fae5;
+      color: #065f46;
+      font-size: 15px;
+      flex-shrink: 0;
+      margin-top: 0;
+    }
+
+    .callout {
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin: 16px 0;
+      font-size: 14px;
+      line-height: 1.6;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .callout-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .callout.warning {
+      background: #fff8e1;
+      border-left: 3px solid #f59e0b;
+    }
+
+    .callout.note {
+      background: #eff6ff;
+      border-left: 3px solid #3b82f6;
+    }
+
+    .callout.success {
+      background: #f0fdf4;
+      border-left: 3px solid #22c55e;
+    }
+
+    .callout.danger {
+      background: #fef2f2;
+      border-left: 3px solid #ef4444;
+    }
+
+    .callout strong {
+      font-weight: 700;
+    }
+
+    .screenshot-wrap {
+      border: 1px solid #e0e3e8;
+      border-radius: 10px;
+      overflow: hidden;
+      margin: 16px 0 6px;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .screenshot-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .screenshot-caption {
+      font-size: 13px;
+      color: #64748b;
+      text-align: center;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+
+    .step-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 16px;
+      padding: 24px 26px;
+      margin: 24px 0 0;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+
+    .step-card-header {
+      font-size: 18px;
+      font-weight: 800;
+      color: #111827;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .step-card-sub {
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .flow-card {
+      background: #f8fafc;
+      border: 1px solid #dbeafe;
+      border-radius: 16px;
+      padding: 20px 22px;
+      margin: 18px 0 0;
+    }
+
+    .flow-step {
+      padding: 18px 18px 14px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+    }
+
+    .flow-step:last-child {
+      margin-bottom: 0;
+    }
+
+    .flow-step-heading {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 10px;
+      font-weight: 700;
+      color: #111827;
+      font-size: 15px;
+    }
+
+    .flow-step-num {
+      width: 30px;
+      height: 30px;
+      min-width: 30px;
+      border-radius: 50%;
+      background: #1f2937;
+      color: #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .flow-step p {
+      margin: 0;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    .flow-step ul {
+      margin: 10px 0 0 28px;
+      padding: 0;
+      list-style: disc;
+      color: #334155;
+      line-height: 1.7;
+    }
+
+    .flow-step ul li {
+      margin-bottom: 8px;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #e5e7eb;
+      margin: 32px 0;
+    }
+
+    code {
+      background: #f1f3f6;
+      border: 1px solid #dde1e7;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-family: "SF Mono", Monaco, monospace;
+      font-size: 13px;
+      color: #c7254e;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      background: #eef2ff;
+      border: 1px solid #c7d2fe;
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #3730a3;
+      font-family: "SF Mono", Monaco, monospace;
+      margin: 2px 5px 2px 0;
+    }
+
+    .button,
+    .button-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #2563eb;
+      color: #fff;
+      padding: 12px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: background 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .button-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .summary-table,
+    .report-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 18px 0 24px;
+      font-size: 14px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .summary-table th,
+    .report-table th {
+      background: #eef2ff;
+      color: #0f172a;
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 14px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .summary-table td,
+    .report-table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e5e7eb;
+      vertical-align: top;
+      color: #334155;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .summary-table tbody tr:nth-child(even) td,
+    .report-table tr:nth-child(even) td {
+      background: #f8fafc;
+    }
+
+    .footer {
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid #e5e7eb;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+    }
+
+    @media print {
+      body { background: #fff; }
+      .page-wrap { padding: 0; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrap">
+
+    <div class="breadcrumb">
+      <a href="#">Account Editor Help Center</a><span>&rsaquo;</span>
+      <a href="#">3PL Integrations</a>
+    </div>
+
+    <h1 class="article-title">Account Editor Delayed Master Flow &mdash; Shopify Flow Automation Reference</h1>
+    <div class="article-meta">3PL Integrations &nbsp;&bull;&nbsp; Last updated: April 2026</div>
+
+    <!-- INTRO -->
+    <p>This is the <strong>single canonical Shopify Flow</strong> used across all 3PL integrations that require delayed payment capture with Account Editor. It creates an editing window for customers, then automatically captures payment and tags the order &mdash; triggering your 3PL to download the finalized order with all edits included.</p>
+
+    <div class="callout note">
+      <span class="callout-icon">&#x1F4DD;</span>
+      <div><strong>One Flow for all integrations.</strong> This Master Flow handles every scenario &mdash; different sales channels, fraud risk levels, restricted orders, and normal orders with a configurable grace period. Import it once, configure the timing, and it works for any supported 3PL.</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- APPLICABILITY -->
+    <div class="section-heading"><span>&#x1F4CB;</span> Which 3PLs Use This Flow?</div>
+
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Group</th>
+          <th>3PLs</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong style="color:#16a34a">Required</strong></td>
+          <td>ACT Logistics, Black Bear Fulfilment, Malpha 3PL, Next3pl, Scend, Future Fulfilment, Coghlan 3PL, Blackmann (Path B)</td>
+          <td>Flow must be active. 3PL only imports orders with <code>Paid</code> status.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#2563eb">Optional</strong></td>
+          <td>Shippingbo, Starshipit, Ship Theory</td>
+          <td>3PL filters by payment status on their side. Flow automates capture instead of manual.</td>
+        </tr>
+        <tr>
+          <td><strong style="color:#64748b">Not Needed</strong></td>
+          <td>Blackmann (Path A &mdash; High Cohesion iPaaS)</td>
+          <td>Live sync handles edits in real-time. No delayed capture required.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="divider">
+
+    <!-- THE FLOW -->
+    <div class="section-heading"><span>&#x26A1;</span> The Complete Flow</div>
+    <p>This is the full Account Editor Delayed Master Flow with all conditions, the grace period wait, order tagging, and payment capture.</p>
+
+    <div class="step-card">
+      <div class="step-card-header">&#x1F504; Account Editor Delayed Master Flow</div>
+      <div class="step-card-sub">&#x2705; 7-Step Automation</div>
+
+      <div class="flow-card">
+
+        <!-- Step 1 -->
+        <div class="flow-step">
+          <div class="flow-step-heading"><span class="flow-step-num">1</span>Trigger &mdash; Order Created</div>
+          <p>This workflow starts when a <strong>new order is created</strong> in your Shopify store.</p>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flow-step">
+          <div class="flow-step-heading"><span class="flow-step-num">2</span>Condition 1 &mdash; Sales Channel Check</div>
+          <p>The Flow checks whether the order came from the <strong>Online Store</strong> channel.</p>
+          <ul>
+            <li>If <strong>NOT from Online Store</strong> (POS, draft order, other channels) &rarr; skip to <strong>Step 7</strong> &mdash; capture payment immediately. No wait, no tag.</li>
+            <li>If <strong>from Online Store</strong> &rarr; continue to Step 3.</li>
+          </ul>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flow-step">
+          <div class="flow-step-heading"><span class="flow-step-num">3</span>Condition 2 &mdash; Fraud Risk Check</div>
+          <p>Shopify&rsquo;s fraud analysis checks the order risk level.</p>
+          <ul>
+            <li>If risk level is <strong>HIGH</strong> &rarr; skip to <strong>Step 7</strong> &mdash; capture payment immediately. No wait, no tag.</li>
+            <li>If risk is <strong>not HIGH</strong> (low or medium) &rarr; continue to Step 4.</li>
+          </ul>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flow-step">
+          <div class="flow-step-heading"><span class="flow-step-num">4</span>Condition 3 &mdash; Restricted Tag Check</div>
+          <p>The Flow checks whether the order is tagged <code>restricted</code>.</p>
+          <ul>
+            <li>If tagged <strong>&ldquo;restricted&rdquo;</strong> &rarr; skip to <strong>Step 7</strong> &mdash; capture payment immediately. No wait, no tag.</li>
+            <li>If <strong>not restricted</strong> &rarr; continue to Step 5.</li>
+          </ul>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="flow-step">
+          <div class="flow-step-heading"><span class="flow-step-num">5</span>Wait &mdash; Grace Period</div>
+          <p>The Flow waits for <strong>15 minutes</strong> (configurable). This is the editing window where the customer or merchant can modify the order in Account Editor &mdash; add/remove items, change quantities, update the address.</p>
+          <p style="margin-top:8px"><strong>During this wait:</strong> Payment stays <code>Authorized</code>. Your 3PL does not see the order. All edits happen freely.</p>
+        </div>
+
+        <!-- Step 6 -->
+        <div class="flow-step">
+          <div class="flow-step-heading"><span class="flow-step-num">6</span>Add Order Tag &mdash; <code>processed_by_AE</code></div>
+          <p>The Flow adds the tag <span class="tag">processed_by_AE</span> to the order. This tag identifies orders that went through the full Account Editor editing flow.</p>
+          <p style="margin-top:8px"><strong>Required by:</strong> Black Bear Fulfilment, ACT Logistics, Future Fulfilment. <strong>Harmless for all other 3PLs</strong> &mdash; the tag is simply ignored.</p>
+        </div>
+
+        <!-- Step 7 -->
+        <div class="flow-step">
+          <div class="flow-step-heading"><span class="flow-step-num">7</span>Capture Payment</div>
+          <p>The Flow captures the authorized payment. Order status changes from <code>Authorized</code> to <strong>Paid</strong>. Your 3PL now downloads the finalized order with all edits included.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- BRANCH SUMMARY -->
+    <div class="section-heading"><span>&#x1F4CA;</span> Branch Summary</div>
+    <p>Every order follows one of these four paths:</p>
+
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>Wait?</th>
+          <th>Tagged?</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Order from <strong>other channels</strong> (POS, draft, B2B)</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Capture payment immediately</td>
+        </tr>
+        <tr>
+          <td>Online Store + <strong>HIGH</strong> fraud risk</td>
+          <td>No</td>
+          <td>No</td>
+          <td>Capture payment immediately</td>
+        </tr>
+        <tr>
+          <td>Online Store + tagged <strong>&ldquo;restricted&rdquo;</strong></td>
+          <td>No</td>
+          <td>No</td>
+          <td>Capture payment immediately</td>
+        </tr>
+        <tr>
+          <td>Online Store + <strong>normal order</strong> (low/medium risk, not restricted)</td>
+          <td><strong>Yes</strong> (15 min)</td>
+          <td><strong>Yes</strong> (<code>processed_by_AE</code>)</td>
+          <td>Wait &rarr; Tag &rarr; Capture</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="divider">
+
+    <!-- CONFIGURATION -->
+    <div class="section-heading"><span>&#x2699;&#xFE0F;</span> Configuration Notes</div>
+
+    <div class="step-card">
+      <div class="step-card-header">&#x23F1;&#xFE0F; Wait Time (Grace Period)</div>
+      <div class="step-card-sub">&#x1F4DD; Configurable per merchant</div>
+      <p>The default wait time is <strong>15 minutes</strong>. You can adjust this in the Shopify Flow editor to match your editing deadline. Recommended range: <strong>15 minutes to 2 hours</strong>.</p>
+      <div class="callout warning">
+        <span class="callout-icon">&#x26A0;&#xFE0F;</span>
+        <div><strong>Keep timings in sync:</strong> The editing deadline shown to the customer in Account Editor should match (or be slightly shorter than) the Flow wait time. For example: Flow = 30 min, Editing Deadline = 25&ndash;30 min. <strong>Never</strong> set the editing deadline longer than the Flow timing.</div>
+      </div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-card-header">&#x1F3F7;&#xFE0F; The <code>processed_by_AE</code> Tag</div>
+      <div class="step-card-sub">&#x1F4DD; Why it&rsquo;s added</div>
+      <p>The tag is added <strong>after the wait but before capture</strong>. It serves two purposes:</p>
+      <ul class="bullet-list">
+        <li><strong>Identifies edited orders</strong> &mdash; Distinguishes orders that went through the full editing window from immediately-captured orders (POS, high risk, restricted)</li>
+        <li><strong>Required by some 3PLs</strong> &mdash; Black Bear Fulfilment, ACT Logistics, and Future Fulfilment use this tag to identify processed orders. All other 3PLs safely ignore it</li>
+      </ul>
+    </div>
+
+    <div class="step-card">
+      <div class="step-card-header">&#x26A1; Why Some Orders Capture Immediately</div>
+      <div class="step-card-sub">&#x1F4DD; No wait, no tag</div>
+      <ul class="bullet-list">
+        <li><strong>Non-Online Store orders (POS, draft, B2B)</strong> &mdash; These are merchant-initiated. No customer editing window is expected</li>
+        <li><strong>HIGH fraud risk orders</strong> &mdash; These need manual review. Capturing immediately lets you process or cancel them quickly</li>
+        <li><strong>Restricted orders</strong> &mdash; A business-specific flag indicating the order should not be delayed (e.g., regulated products, compliance requirements)</li>
+      </ul>
+    </div>
+
+    <hr class="divider">
+
+    <!-- PREREQUISITES -->
+    <div class="section-heading"><span>&#x1F4CB;</span> Prerequisites</div>
+
+    <div class="step-card">
+      <div class="step-card-header">&#x1F4B3; Payment Capture Must Be Set to Manual</div>
+      <div class="step-card-sub">&#x2705; Required before importing the Flow</div>
+      <p>Before importing this Flow, ensure Shopify is set to <strong>manually capture payment</strong>. If payment is captured automatically at checkout, the Flow has nothing to delay &mdash; orders will be captured and downloaded by your 3PL before any editing happens.</p>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span>Go to <strong>Shopify Admin &rarr; Settings &rarr; Payments</strong></li>
+        <li><span class="step-num">2</span>Set Payment capture method to <strong>&ldquo;Manually capture payment for orders&rdquo;</strong></li>
+        <li><span class="step-num">3</span>Click <strong>Save</strong></li>
+      </ol>
+      <div class="callout warning">
+        <span class="callout-icon">&#x26A0;&#xFE0F;</span>
+        <div><strong>7-day limit:</strong> Shopify Payments authorizations expire after 7 days. Keep your grace period well within this window. If the Flow fails or is deactivated, monitor for &ldquo;Authorized&rdquo; orders older than your grace period.</div>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- IMPORT INSTRUCTIONS -->
+    <div class="section-heading"><span>&#x1F4E5;</span> How to Import the Flow</div>
+
+    <div class="step-card">
+      <div class="step-card-header">&#x26A1; Import into Shopify Flow</div>
+      <div class="step-card-sub">&#x2705; Step-by-Step</div>
+      <ol class="steps-list">
+        <li><span class="step-num">1</span>Download the <strong>Account Editor Delayed Master Flow</strong> file using the button below</li>
+        <li><span class="step-num">2</span>In Shopify Admin, go to <strong>Apps &rarr; Shopify Flow</strong></li>
+        <li><span class="step-num">3</span>Click <strong>Import</strong> and select the downloaded <code>.flow</code> file</li>
+        <li><span class="step-num">4</span>Review the Flow &mdash; adjust the <strong>wait time</strong> in Step 5 to match your editing deadline (default: 15 minutes)</li>
+        <li><span class="step-num">5</span>Click <strong>Activate</strong> to enable the Flow</li>
+        <li><span class="step-num">6</span>Click <strong>Save</strong></li>
+      </ol>
+
+      <div style="text-align:center;margin:20px 0">
+        <a href="#" class="button-primary" onclick="alert('This will download the Account Editor Delayed Master Flow file.'); return false;">&#x1F4E5; Download Account Editor Delayed Master Flow</a>
+        <p style="margin-top:10px;font-size:13px;color:#64748b;max-width:540px;margin-left:auto;margin-right:auto">Download the pre-built <code>.flow</code> file &mdash; then import it into Shopify Flow</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- VERIFICATION -->
+    <div class="section-heading"><span>&#x1F9EA;</span> Verification Checklist</div>
+    <p>After importing, verify the Flow is working correctly:</p>
+    <ul class="check-list">
+      <li><span class="chk">&#x2705;</span>Flow status shows <strong>Active</strong> in Shopify Flow</li>
+      <li><span class="chk">&#x2705;</span>Place a test order from the <strong>Online Store</strong> &mdash; verify it stays &ldquo;Authorized&rdquo; during the wait</li>
+      <li><span class="chk">&#x2705;</span>Make edits in Account Editor during the grace period</li>
+      <li><span class="chk">&#x2705;</span>After the wait, confirm payment is <strong>automatically captured</strong></li>
+      <li><span class="chk">&#x2705;</span>Confirm the <span class="tag">processed_by_AE</span> tag appears on the order</li>
+      <li><span class="chk">&#x2705;</span>Confirm the order appears in your 3PL with <strong>all edits included</strong></li>
+      <li><span class="chk">&#x2705;</span>Place a test POS or draft order &mdash; verify it captures <strong>immediately</strong> (no wait, no tag)</li>
+    </ul>
+
+    <hr class="divider">
+
+    <!-- TROUBLESHOOTING -->
+    <div class="section-heading"><span>&#x26A0;&#xFE0F;</span> Troubleshooting</div>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Issue</th>
+          <th>Likely Cause</th>
+          <th>Fix</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Orders capture immediately (no wait)</td>
+          <td>Payment capture set to &ldquo;Automatically at checkout&rdquo;</td>
+          <td>Change to &ldquo;Manually capture payment for orders&rdquo; in Shopify Settings &rarr; Payments</td>
+        </tr>
+        <tr>
+          <td>Flow not triggering at all</td>
+          <td>Flow is not activated or was deactivated by a Shopify update</td>
+          <td>Open Shopify Flow &rarr; check the Flow is <strong>Active</strong> &rarr; re-activate if needed</td>
+        </tr>
+        <tr>
+          <td>Orders stuck in &ldquo;Authorized&rdquo; forever</td>
+          <td>Flow errored during execution</td>
+          <td>Check Flow run history for errors &rarr; re-import the Flow if needed</td>
+        </tr>
+        <tr>
+          <td>Tag <code>processed_by_AE</code> not appearing</td>
+          <td>Order captured via an immediate branch (POS, high risk, restricted)</td>
+          <td>This is expected &mdash; only orders that go through the full wait get tagged</td>
+        </tr>
+        <tr>
+          <td>Online Store orders capturing too fast</td>
+          <td>Wait time set too short in the Flow</td>
+          <td>Edit the Flow &rarr; increase the wait time to match your editing deadline</td>
+        </tr>
+        <tr>
+          <td>POS orders waiting instead of capturing immediately</td>
+          <td>Channel condition not set correctly</td>
+          <td>Verify Condition 1 checks for &ldquo;Online Store&rdquo; channel name exactly</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="divider">
+
+    <!-- NEED HELP -->
+    <div class="section-heading"><span>&#x1F198;</span> Need Help?</div>
+    <p>If the Flow isn&rsquo;t working as expected, contact Account Editor Support and share:</p>
+    <ul class="check-list">
+      <li><span class="chk">&bull;</span>Your store URL</li>
+      <li><span class="chk">&bull;</span>Which 3PL you are integrating with</li>
+      <li><span class="chk">&bull;</span>Screenshot of Shopify Flow &rarr; Account Editor Delayed Master Flow status</li>
+      <li><span class="chk">&bull;</span>Screenshot of the Flow run history (showing any errors)</li>
+      <li><span class="chk">&bull;</span>The affected order number</li>
+    </ul>
+
+    <div class="footer">
+      Last updated: April 2026 &nbsp;&bull;&nbsp; Account Editor Help Center &nbsp;&bull;&nbsp; support@accounteditor.com
+    </div>
+
+  </div>
+</body>
+
+</html>

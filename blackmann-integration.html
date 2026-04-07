@@ -495,11 +495,11 @@
       <div class="path-selector">
         <div class="path-option path-green">
           <div class="path-option-title">&#x2705; High Cohesion iPaaS</div>
-          <p>Live edits sync in real-time. Account Editor Master Flow <strong>may not be needed</strong>. Jump to <strong>Path A</strong> below.</p>
+          <p>Live edits sync in real-time. Account Editor Delayed Master Flow <strong>may not be needed</strong>. Jump to <strong>Path A</strong> below.</p>
         </div>
         <div class="path-option path-blue">
           <div class="path-option-title">&#x1F504; Other iPaaS / Standard</div>
-          <p>Orders must be finalized before Blackmann downloads. Requires <strong>Account Editor Master Flow</strong>. Jump to <strong>Path B</strong> below.</p>
+          <p>Orders must be finalized before Blackmann downloads. Requires <strong>Account Editor Delayed Master Flow</strong>. Jump to <strong>Path B</strong> below.</p>
         </div>
       </div>
     </div>
@@ -521,13 +521,13 @@
       <ul class="check-list">
         <li><span class="chk">&#x2705;</span>Orders can download to Blackmann <strong>immediately</strong></li>
         <li><span class="chk">&#x2705;</span>Edits made in Account Editor during the editing window <strong>sync automatically</strong></li>
-        <li><span class="chk">&#x2705;</span>Account Editor Master Flow is <strong>not necessary</strong></li>
+        <li><span class="chk">&#x2705;</span>Account Editor Delayed Master Flow is <strong>not necessary</strong></li>
         <li><span class="chk">&#x2705;</span>No Shopify Flow import required</li>
       </ul>
 
       <div class="callout warning">
         <span class="callout-icon">&#x26A0;&#xFE0F;</span>
-        <div><strong>Action required:</strong> Confirm with your <strong>High Cohesion</strong> and <strong>Blackmann</strong> representatives that live updates are configured for your specific account. If live sync is not active, fall back to <strong>Path B</strong> (Account Editor Master Flow).</div>
+        <div><strong>Action required:</strong> Confirm with your <strong>High Cohesion</strong> and <strong>Blackmann</strong> representatives that live updates are configured for your specific account. If live sync is not active, fall back to <strong>Path B</strong> (Account Editor Delayed Master Flow).</div>
       </div>
 
       <div style="border-top:1px solid #eee;margin:16px 0"></div>
@@ -567,12 +567,12 @@
     <!-- PATH B — STANDARD / DELAYED CAPTURE -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
 
-    <div class="section-heading"><span>&#x1F504;</span> Path B &mdash; Standard Integration (Account Editor Master Flow)</div>
+    <div class="section-heading"><span>&#x1F504;</span> Path B &mdash; Standard Integration (Account Editor Delayed Master Flow)</div>
     <p>If you are <strong>not using High Cohesion</strong>, or if live sync is not confirmed on your account, use this standard integration method. Blackmann typically downloads orders when payment status is <strong>&ldquo;Paid&rdquo;</strong>.</p>
 
     <!-- HOW IT WORKS -->
     <div class="step-card">
-      <div class="step-card-header">&#x1F504; How the Account Editor Master Flow Works</div>
+      <div class="step-card-header">&#x1F504; How the Account Editor Delayed Master Flow Works</div>
       <div class="step-card-sub">&#x1F4CB; Order Lifecycle</div>
 
       <div class="flow-card">
@@ -624,11 +624,11 @@
 
     <!-- STEP 2 — Import the Flow -->
     <div class="step-card">
-      <div class="step-card-header">&#x26A1; Step 2 &mdash; Import the Account Editor Master Flow</div>
+      <div class="step-card-header">&#x26A1; Step 2 &mdash; Import the Account Editor Delayed Master Flow</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
-      <p>The Account Editor Master Flow is a pre-built Shopify Flow automation that holds payment capture for a configurable grace period, then captures automatically &mdash; triggering Blackmann to download the finalized order.</p>
+      <p>The Account Editor Delayed Master Flow is a pre-built Shopify Flow automation that holds payment capture for a configurable grace period, then captures automatically &mdash; triggering Blackmann to download the finalized order.</p>
       <ol class="steps-list">
-        <li><span class="step-num">1</span>Download the <strong>Account Editor Master Flow</strong> file (provided with this guide)</li>
+        <li><span class="step-num">1</span>Download the <strong>Account Editor Delayed Master Flow</strong> file (provided with this guide)</li>
         <li><span class="step-num">2</span>In Shopify Admin, go to <strong>Apps &rarr; Shopify Flow</strong></li>
         <li><span class="step-num">3</span>Click <strong>Import</strong> and select the downloaded <code>.flow</code> file</li>
         <li><span class="step-num">4</span>Configure the <strong>grace period timing</strong> to match your editing deadline (e.g., <strong>30 minutes</strong>)</li>
@@ -637,7 +637,7 @@
       </ol>
 
       <div style="text-align:center;margin:20px 0">
-        <a href="#" class="button-primary" onclick="alert('This will download the Account Editor Master Flow file.'); return false;">&#x1F4E5; Download Account Editor Master Flow</a>
+        <a href="#" class="button-primary" onclick="alert('This will download the Account Editor Delayed Master Flow file.'); return false;">&#x1F4E5; Download Account Editor Delayed Master Flow</a>
         <p style="margin-top:10px;font-size:13px;color:#64748b;max-width:540px;margin-left:auto;margin-right:auto">Download the pre-built Flow file &mdash; then import it into Shopify Flow</p>
       </div>
 
@@ -746,7 +746,7 @@
       </tbody>
     </table>
 
-    <p style="font-weight:700;color:#111;margin-bottom:4px;margin-top:24px">Path B &mdash; Standard (Account Editor Master Flow)</p>
+    <p style="font-weight:700;color:#111;margin-bottom:4px;margin-top:24px">Path B &mdash; Standard (Account Editor Delayed Master Flow)</p>
     <table class="report-table">
       <thead>
         <tr>
@@ -763,7 +763,7 @@
         </tr>
         <tr>
           <td><strong>Shopify</strong> &rarr; Apps &rarr; Shopify Flow</td>
-          <td>Account Editor Master Flow</td>
+          <td>Account Editor Delayed Master Flow</td>
           <td><strong>Active</strong> &mdash; grace period configured</td>
         </tr>
         <tr>
@@ -809,7 +809,7 @@
         <tr>
           <td>Orders appearing in Blackmann too early (Path B)</td>
           <td>Payment capture set to &ldquo;Automatically at checkout&rdquo; or Flow not activated</td>
-          <td>Verify payment capture = &ldquo;Manually capture payment for orders&rdquo; and the Account Editor Master Flow is <strong>Active</strong></td>
+          <td>Verify payment capture = &ldquo;Manually capture payment for orders&rdquo; and the Account Editor Delayed Master Flow is <strong>Active</strong></td>
         </tr>
         <tr>
           <td>Orders not appearing after grace period (Path B)</td>
@@ -861,7 +861,7 @@
       <li><span class="chk">&bull;</span>Your store URL</li>
       <li><span class="chk">&bull;</span>Which iPaaS you are using (High Cohesion or other)</li>
       <li><span class="chk">&bull;</span>Screenshot of Shopify &rarr; Settings &rarr; Payment capture method</li>
-      <li><span class="chk">&bull;</span>Screenshot of Shopify Flow &rarr; Account Editor Master Flow status and run history (Path B)</li>
+      <li><span class="chk">&bull;</span>Screenshot of Shopify Flow &rarr; Account Editor Delayed Master Flow status and run history (Path B)</li>
       <li><span class="chk">&bull;</span>The affected order number</li>
     </ul>
 

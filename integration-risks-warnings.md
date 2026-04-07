@@ -12,7 +12,7 @@ This document covers all known risks, warnings, and precautions that merchants s
 
 | Risk | Severity | Impact | Likelihood |
 |---|---|---|---|
-| Account Editor Master Flow fails silently | **CRITICAL** | Orders never ship, revenue lost | Medium |
+| Account Editor Delayed Master Flow fails silently | **CRITICAL** | Orders never ship, revenue lost | Medium |
 | Payment authorization expires (7 days) | **CRITICAL** | Payment lost entirely, must re-invoice | Medium |
 | Wrong payment capture setting | **CRITICAL** | Every order downloads unedited to 3PL | High (setup error) |
 | Editing after grace period | **HIGH** | 3PL ships old version of the order | Medium |
@@ -31,7 +31,7 @@ This document covers all known risks, warnings, and precautions that merchants s
 **Severity:** CRITICAL
 **Applies to:** All integrations using manual or delayed capture
 
-Shopify Payments authorizations expire after **7 days**. If the merchant or the Account Editor Master Flow does not capture payment within this window, the authorization lapses. The merchant cannot collect payment and must contact the customer to re-order or re-invoice.
+Shopify Payments authorizations expire after **7 days**. If the merchant or the Account Editor Delayed Master Flow does not capture payment within this window, the authorization lapses. The merchant cannot collect payment and must contact the customer to re-order or re-invoice.
 
 **What happens:**
 Order sits in "Authorized" for more than 7 days → authorization expires → payment cannot be captured → 3PL never downloads the order → revenue is lost.
@@ -41,9 +41,9 @@ Keep the grace period well under 7 days (recommended: **30 minutes to 2 hours**)
 
 ---
 
-### 2. Account Editor Master Flow Fails Silently
+### 2. Account Editor Delayed Master Flow Fails Silently
 **Severity:** CRITICAL
-**Applies to:** All integrations using the Account Editor Master Flow
+**Applies to:** All integrations using the Account Editor Delayed Master Flow
 
 If the Shopify Flow crashes, gets deactivated by a Shopify update, or encounters an error, payment is **never captured**. The order sits in "Authorized" indefinitely. The 3PL never downloads it. The merchant may not notice for days.
 
@@ -82,12 +82,12 @@ Keep grace periods as short as possible (30 minutes is ideal). Avoid grace perio
 
 ### 5. Double Capture Attempts
 **Severity:** MEDIUM
-**Applies to:** All integrations using the Account Editor Master Flow
+**Applies to:** All integrations using the Account Editor Delayed Master Flow
 
-If a merchant **manually captures payment** on an order AND the Account Editor Master Flow also fires for the same order, the second capture attempt will fail. This can leave confusing payment statuses or trigger error notifications.
+If a merchant **manually captures payment** on an order AND the Account Editor Delayed Master Flow also fires for the same order, the second capture attempt will fail. This can leave confusing payment statuses or trigger error notifications.
 
 **How to prevent:**
-Choose one capture method and stick with it. If using the Account Editor Master Flow, **do not manually capture payment** on orders. Train staff to let the Flow handle capture. If you must manually capture a specific order, deactivate the Flow for that order first.
+Choose one capture method and stick with it. If using the Account Editor Delayed Master Flow, **do not manually capture payment** on orders. Train staff to let the Flow handle capture. If you must manually capture a specific order, deactivate the Flow for that order first.
 
 ---
 
@@ -120,7 +120,7 @@ Set a clear editing deadline in Account Editor that matches (or is slightly shor
 
 ### 8. Timing Mismatch — Editing Deadline vs Flow
 **Severity:** HIGH
-**Applies to:** All integrations using the Account Editor Master Flow
+**Applies to:** All integrations using the Account Editor Delayed Master Flow
 
 If the **editing deadline** shown to the customer (e.g., 30 minutes) does not match the **Flow timing** (e.g., 15 minutes), the customer may think they still have time to edit while payment has already been captured and the 3PL has downloaded the unedited order.
 
@@ -133,9 +133,9 @@ Always sync the editing deadline in Account Editor with the grace period in Shop
 
 ### 9. POS, Draft & B2B Orders Bypass the Flow
 **Severity:** MEDIUM
-**Applies to:** All integrations using the Account Editor Master Flow
+**Applies to:** All integrations using the Account Editor Delayed Master Flow
 
-**Point-of-Sale (POS)** orders typically capture payment instantly at the terminal. **Draft orders** and **B2B orders** may have different payment statuses that don't follow the expected Authorized → Paid flow. The Account Editor Master Flow may not trigger for these order types.
+**Point-of-Sale (POS)** orders typically capture payment instantly at the terminal. **Draft orders** and **B2B orders** may have different payment statuses that don't follow the expected Authorized → Paid flow. The Account Editor Delayed Master Flow may not trigger for these order types.
 
 **What happens:**
 POS order placed → payment captured instantly → 3PL downloads immediately → no editing window. Draft order created → payment status may be "Pending" instead of "Authorized" → Flow doesn't trigger → order may never be captured.
@@ -160,7 +160,7 @@ Marketplace orders typically don't need the delayed capture flow since editing i
 **Severity:** MEDIUM
 **Applies to:** Stores with subscription apps
 
-Subscription apps (Recharge, Bold Subscriptions, etc.) may handle payment capture independently. Recurring orders created by subscription apps may bypass the Account Editor Master Flow entirely, capturing payment immediately and sending unedited orders to the 3PL.
+Subscription apps (Recharge, Bold Subscriptions, etc.) may handle payment capture independently. Recurring orders created by subscription apps may bypass the Account Editor Delayed Master Flow entirely, capturing payment immediately and sending unedited orders to the 3PL.
 
 **How to mitigate:**
 Check whether your subscription app respects Shopify's payment capture settings. Test a subscription renewal order to confirm it follows the expected flow. If it doesn't, contact the subscription app's support team to configure delayed capture compatibility.
@@ -171,7 +171,7 @@ Check whether your subscription app respects Shopify's payment capture settings.
 
 ### 12. Shipping Method Changes Ignored by 3PL
 **Severity:** MEDIUM
-**Applies to:** Dispatch Lab, Next3pl, Malpha 3PL, Scend, Blackmann (Path B)
+**Applies to:** Dispatch Lab, Next3pl, Malpha 3PL, Scend, Black Bear Fulfilment, ACT Logistics, Ready 2 Ship, ShipBob, Fishbowl, Peoplevox, CIN7 OMNI, Blackmann (Path B)
 
 Some 3PLs **do not support shipping method changes** during the editing window. If the Shipping Methods App Block is not disabled in Account Editor, customers may change their shipping method — but the 3PL will use the original shipping method, leading to incorrect shipping and customer complaints.
 
@@ -187,7 +187,7 @@ Check your 3PL integration doc for shipping method support. If your 3PL does not
 Store staff unfamiliar with the manual capture workflow may see orders in "Authorized" status and manually capture payment **before the customer has finished editing**. The 3PL then downloads the unedited order.
 
 **How to prevent:**
-Train all staff who access Shopify Admin on the manual capture workflow. Explain that "Authorized" is the expected status during the editing window. Create internal documentation or an SOP. If using the Account Editor Master Flow, instruct staff to **never manually capture payment** — the Flow handles it.
+Train all staff who access Shopify Admin on the manual capture workflow. Explain that "Authorized" is the expected status during the editing window. Create internal documentation or an SOP. If using the Account Editor Delayed Master Flow, instruct staff to **never manually capture payment** — the Flow handles it.
 
 ---
 
@@ -206,12 +206,12 @@ If the order is still "Authorized" (not captured), use **"Cancel order"** in Sho
 
 ### 15. Flow Deactivation After Shopify Updates
 **Severity:** HIGH
-**Applies to:** All integrations using the Account Editor Master Flow
+**Applies to:** All integrations using the Account Editor Delayed Master Flow
 
-Shopify platform updates or Shopify Flow app updates can occasionally **deactivate or break** imported flows without warning. If the Account Editor Master Flow is deactivated, payment capture stops — but orders keep coming in with "Authorized" status.
+Shopify platform updates or Shopify Flow app updates can occasionally **deactivate or break** imported flows without warning. If the Account Editor Delayed Master Flow is deactivated, payment capture stops — but orders keep coming in with "Authorized" status.
 
 **How to prevent:**
-After any Shopify update or app update, immediately check that the Account Editor Master Flow is still **Active**. Review the run history for any errors. Set up a weekly calendar reminder to verify Flow status. Consider setting up Shopify Flow failure notifications.
+After any Shopify update or app update, immediately check that the Account Editor Delayed Master Flow is still **Active**. Review the run history for any errors. Set up a weekly calendar reminder to verify Flow status. Consider setting up Shopify Flow failure notifications.
 
 ---
 
@@ -242,7 +242,7 @@ During major sales events, monitor Shopify Flow run history more frequently. If 
 Run through this checklist before going live with **any** 3PL integration:
 
 - [ ] **Payment capture setting verified** — Confirm it is NOT set to "Automatically at checkout"
-- [ ] **Account Editor Master Flow is Active** — Check status in Shopify Flow
+- [ ] **Account Editor Delayed Master Flow is Active** — Check status in Shopify Flow
 - [ ] **Grace period and editing deadline are in sync** — Deadline <= Flow timing
 - [ ] **Test order placed** — Verify it shows "Authorized" (not "Paid")
 - [ ] **Test edits made** — Add/remove items during editing window
@@ -261,12 +261,24 @@ Run through this checklist before going live with **any** 3PL integration:
 | **Shippingbo** | Exclusion tags misconfigured — orders leak through | Verify both `authorized` and `on-hold` tags are set in connector settings |
 | **Starshipit** | Status to import left on "Any" — imports all orders | Set Status to import = "Paid" only. Enable auto-import for 20-min sync |
 | **Ship Theory** | Orders Payment Status dropdown set wrong | Set to "Paid" only. Do not select Authorized, Expired, or Partially Paid |
-| **Dispatch Lab** | Does not read live edits + no shipping method support | Must use Account Editor Master Flow. Must disable Shipping Methods App Block |
-| **Next3pl** | Does not read live edits + no shipping method support | Must use Account Editor Master Flow. Must disable Shipping Methods App Block |
+| **Dispatch Lab** | Does not read live edits + no shipping method support | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block |
+| **Next3pl** | Does not read live edits + no shipping method support | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block |
 | **Blackmann** | iPaaS-dependent — wrong path chosen | Confirm with High Cohesion rep if live sync is active before choosing Path A vs Path B |
-| **Malpha 3PL** | Does not read live edits + no shipping method support | Must use Account Editor Master Flow. Must disable Shipping Methods App Block |
-| **Scend** | Does not read live edits + no shipping method support | Must use Account Editor Master Flow. Must disable Shipping Methods App Block |
+| **Malpha 3PL** | Does not read live edits + no shipping method support | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block |
+| **Scend** | Does not read live edits + no shipping method support | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block |
+| **Black Bear Fulfilment** | Does not read live edits + no shipping method support. Flow also adds a tag to orders | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block |
+| **ACT Logistics** | Does not read live edits + no shipping method support. Flow also adds a tag to orders | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block |
 | **Coghlan 3PL** | Partially paid orders not downloaded by default | Contact Coghlan 3PL rep if you need partially paid orders included |
+| **Future Fulfilment** | Does not read live edits. Flow adds a tag to orders. No shipping method limitation | Must use Account Editor Delayed Master Flow. Verify tags are applied correctly |
+| **Borderless360** | Does not read live edits. Flow adds a tag to orders. No shipping method limitation | Must use Account Editor Delayed Master Flow. Verify tags are applied correctly |
+| **Hexspoor** | Does not read live edits. Flow adds a tag to orders. No shipping method limitation | Must use Account Editor Delayed Master Flow. Verify tags are applied correctly |
+| **Ready 2 Ship** | Does not read live edits + no shipping method support. Has own import settings for Pending/Authorized | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block. Set Pending and Authorized imports to "No" in Ready 2 Ship |
+| **ShipBob** | WMS with live edit sync, but no shipping method support. Has own import status filter | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block. Verify ShipBob imports only "Paid" orders |
+| **Fishbowl** | WMS — does not read live edits + no shipping method support | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block |
+| **Peoplevox** | WMS — iPaaS-dependent live edits + no shipping method support | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block. Confirm iPaaS live sync status with provider |
+| **CIN7 OMNI** | OMS — does not read live edits + no shipping method support. No CIN7-side config needed | Must use Account Editor Delayed Master Flow. Must disable Shipping Methods App Block. Test discount code syncing |
+| **James & James** | 3PL/WMS — does not read live edits. Removed items appear with qty=0 unless setting updated | Must use Account Editor Delayed Master Flow. Must contact J&J support to update fulfillable quantity setting before going live |
+| **Shippit** | Does not read live edits. No shipping method limitation. No special config needed | Must use Account Editor Delayed Master Flow |
 
 ---
 
