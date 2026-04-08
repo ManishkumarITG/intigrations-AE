@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Black Bear Fulfilment Integration ï¿½ Account Editor Help Center</title>
+  <title>Black Bear Fulfilment Integration &mdash; Account Editor Help Center</title>
     <link rel="stylesheet" href="assets/styles/help-center-docs.css">
 </head>
 
@@ -32,7 +32,7 @@
 
     <div class="callout warning">
       <span class="callout-icon">&#x26A0;&#xFE0F;</span>
-      <div><strong>Important:</strong> Black Bear Fulfilment uses the <strong>Account Editor Delayed Master Flow</strong> to delay order downloads. Payment is held in <code>Authorized</code> state while customers edit, then the Flow captures payment automatically after the grace period &mdash; triggering Black Bear Fulfilment to download the finalized order.</div>
+      <p><strong>Important:</strong> Black Bear Fulfilment uses the <strong>Account Editor Delayed Master Flow</strong> to delay order downloads. Payment is held in <code>Authorized</code> state while customers edit, then the Flow captures payment automatically after the grace period &mdash; triggering Black Bear Fulfilment to download the finalized order.</p>
     </div>
 
     <hr class="divider">
@@ -73,7 +73,7 @@
     <!-- STEPS HEADING -->
     <div class="section-heading"><span>&#x1FA9C;</span> Step-by-Step Setup</div>
 
-    <!-- STEP 1 ï¿½ Payment Capture Setting -->
+    <!-- STEP 1 &mdash; Payment Capture Setting -->
     <div class="step-card">
       <div class="step-card-header">&#x1F4CB; Step 1 &mdash; Enable Manual Payment Capture in Shopify</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
@@ -88,11 +88,11 @@
 
       <div class="callout warning">
         <span class="callout-icon">&#x26A0;&#xFE0F;</span>
-        <div><strong>7-day limit:</strong> Shopify Payments authorizations expire after 7 days. Always capture payment within this window after editing is complete.</div>
+        <p><strong>7-day limit:</strong> Shopify Payments authorizations expire after 7 days. Always capture payment within this window after editing is complete.</p>
       </div>
     </div>
 
-    <!-- STEP 2 ï¿½ Import the Flow -->
+    <!-- STEP 2 &mdash; Import the Flow -->
     <div class="step-card">
       <div class="step-card-header">&#x26A1; Step 2 &mdash; Import the Account Editor Delayed Master Flow</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
@@ -113,16 +113,16 @@
 
       <div class="callout note">
         <span class="callout-icon">&#x1F4DD;</span>
-        <div><strong>How the Flow works:</strong> When a new order is created, the Flow waits for the configured grace period. After the wait, it automatically captures payment &mdash; changing the status from <code>Authorized</code> to <code>Paid</code>. Black Bear Fulfilment then downloads the order with all edits included.</div>
+        <p><strong>How the Flow works:</strong> When a new order is created, the Flow waits for the configured grace period. After the wait, it automatically captures payment &mdash; changing the status from <code>Authorized</code> to <code>Paid</code>. Black Bear Fulfilment then downloads the order with all edits included.</p>
       </div>
 
       <div class="callout note">
         <span class="callout-icon">&#x1F3F7;&#xFE0F;</span>
-        <div><strong>Order tagging:</strong> This Master Flow also <strong>adds a tag</strong> to the order when the grace period ends and payment is captured. This tag can be used to identify orders that have been processed through the Account Editor editing flow.</div>
+        <p><strong>Order tagging:</strong> This Master Flow also <strong>adds a tag</strong> to the order when the grace period ends and payment is captured. This tag can be used to identify orders that have been processed through the Account Editor editing flow.</p>
       </div>
     </div>
 
-    <!-- STEP 3 ï¿½ Disable Shipping Methods -->
+    <!-- STEP 3 &mdash; Disable Shipping Methods -->
     <div class="step-card">
       <div class="step-card-header">&#x1F6AB; Step 3 &mdash; Disable Shipping Methods App Block in Account Editor</div>
       <div class="step-card-sub">&#x26A0;&#xFE0F; Required &mdash; Black Bear Fulfilment Limitation</div>
@@ -137,11 +137,11 @@
 
       <div class="callout danger">
         <span class="callout-icon">&#x1F6D1;</span>
-        <div><strong>Do not skip this step.</strong> If the Shipping Methods App Block is left enabled, customers may attempt to change their shipping method during the editing window. Black Bear Fulfilment will not reflect these changes, leading to incorrect shipping and customer complaints.</div>
+        <p><strong>Do not skip this step.</strong> If the Shipping Methods App Block is left enabled, customers may attempt to change their shipping method during the editing window. Black Bear Fulfilment will not reflect these changes, leading to incorrect shipping and customer complaints.</p>
       </div>
     </div>
 
-    <!-- STEP 4 ï¿½ Configure Editing Deadline -->
+    <!-- STEP 4 &mdash; Configure Editing Deadline -->
     <div class="step-card">
       <div class="step-card-header">&#x23F1;&#xFE0F; Step 4 &mdash; Configure the Editing Deadline</div>
       <div class="step-card-sub">&#x2705; Step-by-Step Configuration</div>
@@ -155,11 +155,11 @@
 
       <div class="callout note">
         <span class="callout-icon">&#x1F4DD;</span>
-        <div><strong>Keep timings in sync:</strong> The editing deadline shown to the customer should match (or be slightly shorter than) the grace period in Shopify Flow. For example, if the Flow waits 30 minutes before capturing, set the editing deadline to 25&ndash;30 minutes so customers see an accurate countdown.</div>
+        <p><strong>Keep timings in sync:</strong> The editing deadline shown to the customer should match (or be slightly shorter than) the grace period in Shopify Flow. For example, if the Flow waits 30 minutes before capturing, set the editing deadline to 25&ndash;30 minutes so customers see an accurate countdown.</p>
       </div>
     </div>
 
-    <!-- STEP 5 ï¿½ Workflow -->
+    <!-- STEP 5 &mdash; Workflow -->
     <div class="step-card">
       <div class="step-card-header">&#x270F;&#xFE0F; Step 5 &mdash; Your Account Editor Workflow</div>
       <div class="step-card-sub">&#x2705; How Every Order Works After Setup</div>
@@ -184,7 +184,7 @@
 
       <div class="callout success">
         <span class="callout-icon">&#x2705;</span>
-        <div><strong>Setup complete!</strong> Black Bear Fulfilment will always receive the final, correctly edited order. The entire flow is automated &mdash; no manual capture or Black Bear Fulfilment configuration required.</div>
+        <p><strong>Setup complete!</strong> Black Bear Fulfilment will always receive the final, correctly edited order. The entire flow is automated &mdash; no manual capture or Black Bear Fulfilment configuration required.</p>
       </div>
     </div>
 
@@ -311,6 +311,8 @@
 </body>
 
 </html>
+
+
 
 
 

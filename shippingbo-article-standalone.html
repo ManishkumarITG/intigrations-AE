@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shippingbo Integration ï¿½ Account Editor Help Center</title>
+<title>Shippingbo Integration &mdash; Account Editor Help Center</title>
   <link rel="stylesheet" href="assets/styles/help-center-docs.css">
 </head>
 <body>
@@ -20,18 +20,18 @@
   <!-- Breadcrumb -->
   <div class="breadcrumb">
     <a href="#">Account Editor Help Center</a>
-    <span>ï¿½</span>
+    <span>&rsaquo;</span>
     <a href="#">3PL Integrations</a>
   </div>
 
   <!-- Title -->
-  <h1 class="article-title">Shippingbo Integration ï¿½ Shopify Edited Order Sync (Account Editor)</h1>
-  <div class="article-meta">3PL Integrations &nbsp;ï¿½&nbsp; Last updated: April 2026</div>
+  <h1 class="article-title">Shippingbo Integration &mdash; Shopify Edited Order Sync (Account Editor)</h1>
+  <div class="article-meta">3PL Integrations &nbsp;&bull;&nbsp; Last updated: April 2026</div>
 
   <!-- -- STEP 1 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ?? Required Setup ï¿½ Enable Manual Payment Capture in Shopify
+      &#x1F4CB; Required Setup &mdash; Enable Manual Payment Capture in Shopify
     </div>
     <div class="step-card-sub">
       ? Step-by-Step Configuration
@@ -46,8 +46,8 @@
     </ol>
 
     <div class="callout warning">
-      <span class="callout-icon">??</span>
-      <div><strong>Important:</strong> Payment authorizations expire after <strong>7 days</strong> (Shopify Payments). Always capture payment within this window ï¿½ or the authorization will lapse and you won't receive payment for the order.</div>
+      <span class="callout-icon">&#x1F4DD;</span>
+      <p><strong>Important:</strong> Payment authorizations expire after <strong>7 days</strong> (Shopify Payments). Always capture payment within this window &mdash; or the authorization will lapse and you won't receive payment for the order.</p>
     </div>
   </div>
 
@@ -56,7 +56,7 @@
   <!-- -- STEP 2 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ?? Open Connectors in Shippingbo
+      &#x1F4CB; Open Connectors in Shippingbo
     </div>
     <div class="step-card-sub">
       ? Step-by-Step Configuration
@@ -68,9 +68,9 @@
     </ol>
 
     <div class="screenshot-wrap">
-      <img src="assets/images/shippingbo/dashboard-connectors-sidebar.png" alt="Shippingbo Dashboard ï¿½ Connectors highlighted in left sidebar">
+      <img src="assets/images/shippingbo/dashboard-connectors-sidebar.png" alt="Shippingbo Dashboard &mdash; Connectors highlighted in left sidebar">
     </div>
-    <p class="screenshot-caption">Shippingbo Dashboard ï¿½ Click 'Connectors' in the left sidebar (highlighted in red)</p>
+    <p class="screenshot-caption">Shippingbo Dashboard &mdash; Click 'Connectors' in the left sidebar (highlighted in red)</p>
   </div>
 
   <hr class="divider">
@@ -78,7 +78,7 @@
   <!-- -- STEP 3 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ??? Open Your Shopify Connector Settings
+      &#x2699;&#xFE0F; Open Your Shopify Connector Settings
     </div>
     <div class="step-card-sub">
       ? Step-by-Step Configuration
@@ -90,9 +90,9 @@
     </ol>
 
     <div class="screenshot-wrap">
-      <img src="assets/images/shippingbo/shopify.png" alt="My Connectors ï¿½ Shopify block highlighted">
+      <img src="assets/images/shippingbo/shopify.png" alt="My Connectors &mdash; Shopify block highlighted">
     </div>
-    <p class="screenshot-caption">My Connectors ï¿½ Click your Shopify store block (highlighted in red)</p>
+    <p class="screenshot-caption">My Connectors &mdash; Click your Shopify store block (highlighted in red)</p>
   </div>
 
   <hr class="divider">
@@ -100,7 +100,7 @@
   <!-- -- STEP 4 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ?? Set the Exclusion Rules
+      &#x1F4CB; Set the Exclusion Rules
     </div>
     <div class="step-card-sub">
       ? Step-by-Step Configuration
@@ -108,12 +108,12 @@
 
     <ol class="steps-list">
       <li><span class="step-num">1</span> Inside connector settings, scroll down to the <strong>Orders retrieving</strong> section</li>
-      <li><span class="step-num">2</span> Find <strong>"Exclude by payment status"</strong> ï¿½ add these tags:
+      <li><span class="step-num">2</span> Find <strong>"Exclude by payment status"</strong> &mdash; add these tags:
         <br><br>
         <span class="tag">authorized</span>
         <span class="tag">partially_paid</span>
       </li>
-      <li><span class="step-num">3</span> Find <strong>"Exclude by order status"</strong> ï¿½ add these tags:
+      <li><span class="step-num">3</span> Find <strong>"Exclude by order status"</strong> &mdash; add these tags:
         <br><br>
         <span class="tag">on-hold</span>
         <span class="tag">on_hold</span>
@@ -122,13 +122,13 @@
     </ol>
 
     <div class="screenshot-wrap">
-      <img src="assets/images/shippingbo/connector-settings-fields.png" alt="Connector Settings ï¿½ Exclude payment and order status fields highlighted">
+      <img src="assets/images/shippingbo/connector-settings-fields.png" alt="Connector Settings &mdash; Exclude payment and order status fields highlighted">
     </div>
-    <p class="screenshot-caption">Connector Settings ï¿½ Add exclusion tags in both fields as shown (highlighted in red)</p>
+    <p class="screenshot-caption">Connector Settings &mdash; Add exclusion tags in both fields as shown (highlighted in red)</p>
 
     <div class="callout note">
-      <span class="callout-icon">??</span>
-      <div>The value <code>authorized</code> corresponds to Shopify's <code>financial_status</code> field. Shippingbo will skip these orders entirely until payment is captured and status becomes <strong>Paid</strong>.</div>
+      <span class="callout-icon">&#x1F4DD;</span>
+      <p>The value <code>authorized</code> corresponds to Shopify's <code>financial_status</code> field. Shippingbo will skip these orders entirely until payment is captured and status becomes <strong>Paid</strong>.</p>
     </div>
   </div>
 
@@ -137,7 +137,7 @@
   <!-- -- STEP 5 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ?? Edit the Order, Then Capture Payment
+      &#x1F4CB; Edit the Order, Then Capture Payment
     </div>
     <div class="step-card-sub">
       ? Your New Workflow (Every Order)
@@ -145,7 +145,7 @@
 
     <ol class="steps-list">
       <li><span class="step-num">1</span> New order arrives ? Payment = <strong>Authorized</strong> <em>(Shippingbo skips it ?)</em></li>
-      <li><span class="step-num">2</span> Open the order in <strong>Account Editor</strong> ï¿½ add or remove items freely</li>
+      <li><span class="step-num">2</span> Open the order in <strong>Account Editor</strong> &mdash; add or remove items freely</li>
       <li><span class="step-num">3</span> <strong>Save / commit</strong> your edits</li>
       <li><span class="step-num">4</span> Go to <strong>Shopify Admin</strong> ? open the order ? click <strong>Capture Payment</strong></li>
       <li><span class="step-num">5</span> Payment becomes <strong>Paid</strong> ? Shippingbo downloads the final correct order ?</li>
@@ -154,20 +154,20 @@
     <hr style="border:none;border-top:1px solid #eee;margin:16px 0">
 
     <div class="section-heading" style="margin-top:12px">
-      <span class="icon">??</span> What Happens After This Setup
+      <span class="icon">&#x1F504;</span> What Happens After This Setup
     </div>
     <p style="margin-bottom:10px">Once configured, Shippingbo will always receive the final edited order:</p>
     <ul class="check-list">
-      <li><span class="chk">?</span> Correct order total (removed items not counted)</li>
-      <li><span class="chk">?</span> Added items appear correctly</li>
-      <li><span class="chk">?</span> Removed items are excluded from total</li>
-      <li><span class="chk">?</span> Quantity changes respected</li>
-      <li><span class="chk">?</span> No manual correction needed in Shippingbo</li>
+      <li><span class="chk">&#x2022;</span> Correct order total (removed items not counted)</li>
+      <li><span class="chk">&#x2022;</span> Added items appear correctly</li>
+      <li><span class="chk">&#x2022;</span> Removed items are excluded from total</li>
+      <li><span class="chk">&#x2022;</span> Quantity changes respected</li>
+      <li><span class="chk">&#x2022;</span> No manual correction needed in Shippingbo</li>
     </ul>
 
     <div class="callout success">
-      <span class="callout-icon">?</span>
-      <div><strong>Setup complete!</strong> Shippingbo will always receive the final, correctly edited order from now on.</div>
+      <span class="callout-icon">&#x1F4DD;</span>
+      <p><strong>Setup complete!</strong> Shippingbo will always receive the final, correctly edited order from now on.</p>
     </div>
   </div>
 
@@ -176,10 +176,10 @@
   <!-- --  Automation ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ? ï¿½ Automate Payment Capture with Shopify Flow
+      &#x26A1; &mdash; Automate Payment Capture with Shopify Flow
     </div>
     <div class="step-card-sub">
-      ?? Optional Automation to Streamline Your Workflow
+      &#x1F4CB; Optional Automation to Streamline Your Workflow
     </div>
 
     <p>Instead of manually capturing payment on every order, set up a Shopify Flow automation to manage capture while keeping a review window for normal Online Store orders.</p>
@@ -191,7 +191,7 @@
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">2</span>Condition 1 ï¿½ Sales Channel Check</div>
+        <div class="flow-step-heading"><span class="flow-step-num">2</span>Condition 1 &mdash; Sales Channel Check</div>
         <p>The flow checks whether the order came from the <strong>Online Store</strong>.</p>
         <ul>
           <li>If <strong>NOT from Online Store</strong> (for example, POS or draft order) ? capture payment immediately.</li>
@@ -200,8 +200,8 @@
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">3</span>Condition 2 ï¿½ Fraud Risk Check</div>
-        <p>Shopifyï¿½s fraud analysis checks the order risk level.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">3</span>Condition 2 &mdash; Fraud Risk Check</div>
+        <p>Shopify's fraud analysis checks the order risk level.</p>
         <ul>
           <li>If risk level is <strong>HIGH</strong> ? capture payment immediately (review these orders manually).</li>
           <li>If risk is not HIGH ? continue to the next check.</li>
@@ -209,7 +209,7 @@
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">4</span>Condition 3 ï¿½ Restricted Tag Check</div>
+        <div class="flow-step-heading"><span class="flow-step-num">4</span>Condition 3 &mdash; Restricted Tag Check</div>
         <p>The flow checks whether the order is tagged <code>restricted</code>.</p>
         <ul>
           <li>If tagged <strong>"restricted"</strong> ? capture payment immediately.</li>
@@ -219,7 +219,7 @@
     </div>
 
     <div class="section-heading">
-      <span class="icon">??</span> Summary
+      <span class="icon">&#x1F504;</span> Summary
     </div>
 
     <table class="summary-table">
@@ -250,7 +250,7 @@
     </table>
 
     <div class="section-heading">
-      <span class="icon">?</span> Install Flow to Your Store
+      <span class="icon">&#x26A1;</span> Install Flow to Your Store
     </div>
 
     <p>Click to install the pre-built payment capture automation into your Shopify store.</p>
@@ -258,19 +258,22 @@
     <a href="#" class="button-primary">Install Flow</a>
 
     <div class="callout note">
-      <span class="callout-icon">??</span>
-      <div><strong>Why the 15-minute delay?</strong> The wait gives you a short window to review normal, low-risk Online Store orders before payment is finalized. This helps with last-minute cancellations or manual edits in Account Editor before Shippingbo imports the order.</div>
+      <span class="callout-icon">&#x1F4DD;</span>
+      <p><strong>Why the 15-minute delay?</strong> The wait gives you a short window to review normal, low-risk Online Store orders before payment is finalized. This helps with last-minute cancellations or manual edits in Account Editor before Shippingbo imports the order.</p>
     </div>
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    Last updated: April 2026 &nbsp;ï¿½&nbsp; Account Editor Help Center &nbsp;ï¿½&nbsp; support@accounteditor.com
+    Last updated: April 2026 &nbsp;&bull;&nbsp; Account Editor Help Center &nbsp;&bull;&nbsp; support@accounteditor.com
   </div>
 
 </div>
 </body>
 </html>
+
+
+
 
 
 
