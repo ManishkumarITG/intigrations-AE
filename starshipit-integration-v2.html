@@ -1,478 +1,66 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Starshipit Integration — Account Editor Help Center</title>
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f7f8fa;
-      color: #1a1a2e;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .page-wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-
-    .breadcrumb {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 28px;
-    }
-
-    .breadcrumb a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover {
-      text-decoration: underline;
-    }
-
-    .breadcrumb span {
-      margin: 0 6px;
-    }
-
-    .article-title {
-      font-size: 26px;
-      font-weight: 700;
-      color: #111;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .article-meta {
-      font-size: 13px;
-      color: #667085;
-      margin-bottom: 28px;
-    }
-
-    .section-heading {
-      font-size: 17px;
-      font-weight: 700;
-      color: #111;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 32px 0 10px;
-    }
-
-    .section-heading .icon {
-      font-size: 18px;
-    }
-
-    .sub-heading {
-      font-size: 15px;
-      font-weight: 700;
-      color: #111;
-      margin: 20px 0 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    p {
-      margin-bottom: 12px;
-      color: #333;
-    }
-
-    .steps-list {
-      list-style: none;
-      margin: 12px 0 16px;
-      padding: 0;
-    }
-
-    .steps-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 15px;
-      color: #222;
-      line-height: 1.6;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: #f8fbff;
-      border: 1px solid #e2e8f0;
-    }
-
-    .step-num {
-      width: 26px;
-      height: 26px;
-      min-width: 26px;
-      border-radius: 50%;
-      background: #1f2937;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-    }
-
-    .bullet-list {
-      list-style: none;
-      margin: 10px 0 16px;
-      padding: 0;
-    }
-
-    .bullet-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-size: 15px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    .bullet-list li::before {
-      content: "\2022";
-      color: #555;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .check-list {
-      list-style: none;
-      margin: 10px 0 16px;
-      padding: 0;
-    }
-
-    .check-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-size: 15px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    .check-list li .chk {
-      width: 24px;
-      height: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: #d1fae5;
-      color: #065f46;
-      font-size: 15px;
-      flex-shrink: 0;
-      margin-top: 0;
-    }
-
-    .callout {
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 16px 0;
-      font-size: 14px;
-      line-height: 1.6;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .callout-icon {
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .callout.warning {
-      background: #fff8e1;
-      border-left: 3px solid #f59e0b;
-    }
-
-    .callout.note {
-      background: #eff6ff;
-      border-left: 3px solid #3b82f6;
-    }
-
-    .callout.success {
-      background: #f0fdf4;
-      border-left: 3px solid #22c55e;
-    }
-
-    .callout strong {
-      font-weight: 700;
-    }
-
-    .screenshot-wrap {
-      border: 1px solid #e0e3e8;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 16px 0 6px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-
-    .screenshot-wrap img {
-      width: 100%;
-      display: block;
-    }
-
-    .screenshot-caption {
-      font-size: 13px;
-      color: #64748b;
-      text-align: center;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-
-    .step-card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 24px 26px;
-      margin: 24px 0 0;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-    }
-
-    .step-card-header {
-      font-size: 18px;
-      font-weight: 800;
-      color: #111827;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .step-card-sub {
-      font-size: 14px;
-      font-weight: 600;
-      color: #475569;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .flow-card {
-      background: #f8fafc;
-      border: 1px solid #dbeafe;
-      border-radius: 16px;
-      padding: 20px 22px;
-      margin: 18px 0 0;
-    }
-
-    .flow-step {
-      padding: 18px 18px 14px;
-      margin-bottom: 16px;
-      border-radius: 14px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-    }
-
-    .flow-step:last-child {
-      margin-bottom: 0;
-    }
-
-    .flow-step-heading {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 10px;
-      font-weight: 700;
-      color: #111827;
-      font-size: 15px;
-    }
-
-    .flow-step-num {
-      width: 30px;
-      height: 30px;
-      min-width: 30px;
-      border-radius: 50%;
-      background: #1f2937;
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      margin-top: 2px;
-    }
-
-    .flow-step p {
-      margin: 0;
-      color: #334155;
-      line-height: 1.7;
-    }
-
-    .flow-step ul {
-      margin: 10px 0 0 28px;
-      padding: 0;
-      list-style: disc;
-      color: #334155;
-      line-height: 1.7;
-    }
-
-    .flow-step ul li {
-      margin-bottom: 8px;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #e5e7eb;
-      margin: 32px 0;
-    }
-
-    code {
-      background: #f1f3f6;
-      border: 1px solid #dde1e7;
-      border-radius: 4px;
-      padding: 1px 6px;
-      font-family: "SF Mono", Monaco, monospace;
-      font-size: 13px;
-      color: #c7254e;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      background: #eef2ff;
-      border: 1px solid #c7d2fe;
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #3730a3;
-      font-family: "SF Mono", Monaco, monospace;
-      margin: 2px 5px 2px 0;
-    }
-
-    .button,
-    .button-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #2563eb;
-      color: #fff;
-      padding: 12px 22px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: background 0.2s ease;
-      border: 1px solid transparent;
-    }
-
-    .button-primary:hover {
-      background: #1d4ed8;
-    }
-
-    .summary-table,
-    .report-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0 24px;
-      font-size: 14px;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-    }
-
-    .summary-table th,
-    .report-table th {
-      background: #eef2ff;
-      color: #0f172a;
-      padding: 12px 14px;
-      text-align: left;
-      font-weight: 700;
-      font-size: 14px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .summary-table td,
-    .report-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #e5e7eb;
-      vertical-align: top;
-      color: #334155;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .summary-table tbody tr:nth-child(even) td,
-    .report-table tr:nth-child(even) td {
-      background: #f8fafc;
-    }
-
-    .footer {
-      margin-top: 48px;
-      padding-top: 20px;
-      border-top: 1px solid #e5e7eb;
-      font-size: 13px;
-      color: #aaa;
-      text-align: center;
-    }
-
-    @media print {
-      body { background: #fff; }
-      .page-wrap { padding: 0; }
-    }
-  </style>
+  <title>Starshipit Integration ï¿½ Account Editor Help Center</title>
+    <link rel="stylesheet" href="assets/styles/help-center-docs.css">
 </head>
 
 <body>
+  <header class="dummy-topnav" aria-label="Help center navigation">
+    <div class="dummy-topnav-inner">
+      <div class="dummy-brand">account<small>EDITOR</small></div>
+      <input class="dummy-search" type="text" placeholder="Search our help center..." aria-label="Search" />
+      <a href="#" class="dummy-topnav-btn">Go to website</a>
+    </div>
+  </header>
+
   <div class="page-wrap">
 
     <div class="breadcrumb">
-      <a href="#">Account Editor Help Center</a><span>›</span>
+      <a href="#">Account Editor Help Center</a><span>ï¿½</span>
       <a href="#">3PL Integrations</a>
     </div>
 
-    <h1 class="article-title">Starshipit Integration — Shopify Edited order Sync (Account Editor)</h1>
-    <div class="article-meta">3PL Integrations &nbsp;•&nbsp; Last updated: April 2026</div>
+    <h1 class="article-title">Starshipit Integration ï¿½ Shopify Edited order Sync (Account Editor)</h1>
+    <div class="article-meta">3PL Integrations &nbsp;ï¿½&nbsp; Last updated: April 2026</div>
 
     <!-- PURPOSE -->
     <p>This guide helps merchants using Starshipit understand how to configure the integration so that Account Editor
-      order edits are always reflected correctly — with no mismatched totals or stale order data.</p>
+      order edits are always reflected correctly ï¿½ with no mismatched totals or stale order data.</p>
 
     <hr class="divider">
 
     <!-- STEPS HEADING -->
-    <div class="section-heading"><span>🪜</span> Step-by-Step Configuration</div>
+    <div class="section-heading"><span>??</span> Step-by-Step Configuration</div>
 
-    <!-- STEP 1 — Shopify Manual Capture -->
+    <!-- STEP 1 ï¿½ Shopify Manual Capture -->
     <div class="step-card">
-      <div class="step-card-header">📋 Step 1 — Enable Manual Payment Capture in Shopify</div>
-      <div class="step-card-sub">✅ Step-by-Step Configuration</div>
+      <div class="step-card-header">?? Step 1 ï¿½ Enable Manual Payment Capture in Shopify</div>
+      <div class="step-card-sub">? Step-by-Step Configuration</div>
       <p>Set Shopify to hold payment in <strong>Authorized</strong> state so Starshipit cannot import the order until
         editing is complete and payment is captured.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>Log in to <strong>Shopify Admin</strong></li>
-        <li><span class="step-num">2</span>Go to <strong>Settings → Payments</strong></li>
+        <li><span class="step-num">2</span>Go to <strong>Settings ? Payments</strong></li>
         <li><span class="step-num">3</span>Scroll down to <strong>Payment capture method</strong></li>
-        <li><span class="step-num">4</span>Select <strong>"Manually"</strong> — Authorize payment at checkout and
+        <li><span class="step-num">4</span>Select <strong>"Manually"</strong> ï¿½ Authorize payment at checkout and
           capture manually</li>
         <li><span class="step-num">5</span>Click <strong>Save</strong></li>
       </ol>
       <div class="callout warning">
-        <span class="callout-icon">⚠️</span>
+        <span class="callout-icon">??</span>
         <div><strong>7-day limit:</strong> Shopify Payments authorizations expire after 7 days. Always capture payment
           within this window after editing is complete.</div>
       </div>
     </div>
 
-    <!-- STEP 2 — Open Settings -->
+    <!-- STEP 2 ï¿½ Open Settings -->
     <div class="step-card">
-      <div class="step-card-header">⚙️ Step 2 — Open Settings in Starshipit</div>
-      <div class="step-card-sub">✅ Step-by-Step Configuration</div>
+      <div class="step-card-header">?? Step 2 ï¿½ Open Settings in Starshipit</div>
+      <div class="step-card-sub">? Step-by-Step Configuration</div>
       <p>Log in to Starshipit and navigate to <strong>Settings</strong> at the bottom of the left sidebar.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>Log in to <strong>Starshipit</strong> at app.starshipit.com</li>
@@ -481,16 +69,16 @@
       <div class="screenshot-wrap">
         <img
           src="assets/images/starshipit/settings-sidebar.png"
-          alt="Starshipit — Settings highlighted in left sidebar">
+          alt="Starshipit ï¿½ Settings highlighted in left sidebar">
       </div>
-      <p class="screenshot-caption">Starshipit Dashboard — Click 'Settings' in the bottom left sidebar (highlighted in
+      <p class="screenshot-caption">Starshipit Dashboard ï¿½ Click 'Settings' in the bottom left sidebar (highlighted in
         red)</p>
     </div>
 
-    <!-- STEP 3 — Open Integrations -->
+    <!-- STEP 3 ï¿½ Open Integrations -->
     <div class="step-card">
-      <div class="step-card-header">🔌 Step 3 — Open Integrations</div>
-      <div class="step-card-sub">✅ Step-by-Step Configuration</div>
+      <div class="step-card-header">?? Step 3 ï¿½ Open Integrations</div>
+      <div class="step-card-sub">? Step-by-Step Configuration</div>
       <p>Inside Settings, find the <strong>Connect</strong> section and click <strong>Integrations</strong>.</p>
       <ol class="steps-list">
         <li><span class="step-num">1</span>In the Settings sidebar, scroll to the <strong>Connect</strong> section</li>
@@ -499,15 +87,15 @@
       <div class="screenshot-wrap">
         <img
           src="assets/images/starshipit/settings-integrations.png"
-          alt="Starshipit Settings — Integrations highlighted">
+          alt="Starshipit Settings ï¿½ Integrations highlighted">
       </div>
-      <p class="screenshot-caption">Settings → Click 'Integrations' under the Connect section (highlighted in red)</p>
+      <p class="screenshot-caption">Settings ? Click 'Integrations' under the Connect section (highlighted in red)</p>
     </div>
 
-    <!-- STEP 4 — First time: Add new integration -->
+    <!-- STEP 4 ï¿½ First time: Add new integration -->
     <div class="step-card">
-      <div class="step-card-header">➕ Step 4 — Add Your Shopify Store (First Time Setup)</div>
-      <div class="step-card-sub">✅ Only needed if Shopify is not connected yet</div>
+      <div class="step-card-header">? Step 4 ï¿½ Add Your Shopify Store (First Time Setup)</div>
+      <div class="step-card-sub">? Only needed if Shopify is not connected yet</div>
       <p>If you have not connected your Shopify store yet, you will see "You have no current integrations". Click
         <strong>Add a new integration</strong> to connect your store.</p>
       <ol class="steps-list">
@@ -517,9 +105,9 @@
       <div class="screenshot-wrap">
         <img
           src="assets/images/starshipit/add-new-integration.png"
-          alt="Starshipit — Add a new integration button highlighted">
+          alt="Starshipit ï¿½ Add a new integration button highlighted">
       </div>
-      <p class="screenshot-caption">Integrations page — Click '+ Add a new integration' if Shopify is not connected yet
+      <p class="screenshot-caption">Integrations page ï¿½ Click '+ Add a new integration' if Shopify is not connected yet
         (highlighted in red)</p>
 
       <ol class="steps-list" style="margin-top:16px">
@@ -528,17 +116,17 @@
       <div class="screenshot-wrap">
         <img
           src="assets/images/starshipit/shopify-selected.png"
-          alt="Starshipit — Shopify selected from integration list">
+          alt="Starshipit ï¿½ Shopify selected from integration list">
       </div>
-      <p class="screenshot-caption">Add Integration page — Select 'Shopify' from the eCommerce Platform list
+      <p class="screenshot-caption">Add Integration page ï¿½ Select 'Shopify' from the eCommerce Platform list
         (highlighted in red)</p>
 
       <ol class="steps-list" style="margin-top:16px">
-        <li><span class="step-num">3</span>Choose <strong>Integration Version</strong> — select
+        <li><span class="step-num">3</span>Choose <strong>Integration Version</strong> ï¿½ select
           <strong>Enhanced</strong> for best compatibility</li>
         <li><span class="step-num">4</span>Enter your <strong>Shop Name</strong> (e.g. <code>your-store-name</code> from
           your-store-name.myshopify.com)</li>
-        <li><span class="step-num">5</span>Click <strong>Authorize</strong> — you will be redirected to Shopify to
+        <li><span class="step-num">5</span>Click <strong>Authorize</strong> ï¿½ you will be redirected to Shopify to
           approve the connection</li>
         <li><span class="step-num">6</span>Click <strong>"Test to ensure it works"</strong> to verify the connection
         </li>
@@ -546,22 +134,22 @@
       <div class="screenshot-wrap">
         <img
           src="assets/images/starshipit/shopify-settings-import.png"
-          alt="Starshipit — Shopify settings with Status to import highlighted">
+          alt="Starshipit ï¿½ Shopify settings with Status to import highlighted">
       </div>
-      <p class="screenshot-caption">Shopify Settings — Enter shop name, authorize, then set Status to import
+      <p class="screenshot-caption">Shopify Settings ï¿½ Enter shop name, authorize, then set Status to import
         (highlighted in red)</p>
 
       <div class="callout note">
-        <span class="callout-icon">📝</span>
+        <span class="callout-icon">??</span>
         <div><strong>Enhanced vs Classic:</strong> Choose <strong>Enhanced</strong> for improved fulfillment location
           support, Shopify tags, and multi-location shipping. Enhanced is recommended for all new setups.</div>
       </div>
     </div>
 
-    <!-- STEP 5 — Set Status to Import = Paid -->
+    <!-- STEP 5 ï¿½ Set Status to Import = Paid -->
     <div class="step-card">
-      <div class="step-card-header">💳 Step 5 — Set Status to Import = Paid Only</div>
-      <div class="step-card-sub">✅ Step-by-Step Configuration</div>
+      <div class="step-card-header">?? Step 5 ï¿½ Set Status to Import = Paid Only</div>
+      <div class="step-card-sub">? Step-by-Step Configuration</div>
       <p>If Shopify is already connected, click <strong>Settings</strong> next to your store on the Integrations page.
         Then set <strong>"Status to import"</strong> to <strong>Paid</strong> only. This ensures Starshipit skips all
         Authorized orders and only imports when payment is captured.</p>
@@ -572,14 +160,14 @@
       <div class="screenshot-wrap">
         <img
           src="assets/images/starshipit/integration-row-settings.png"
-          alt="Starshipit — Shopify integration row with Settings link">
+          alt="Starshipit ï¿½ Shopify integration row with Settings link">
       </div>
-      <p class="screenshot-caption">Integrations page — Click 'Settings' next to your Shopify store (highlighted in red)
+      <p class="screenshot-caption">Integrations page ï¿½ Click 'Settings' next to your Shopify store (highlighted in red)
       </p>
 
       <ol class="steps-list" style="margin-top:16px">
         <li><span class="step-num">2</span>Find <strong>"Status to import"</strong> section</li>
-        <li><span class="step-num">3</span>Click the dropdown — currently shows <strong>Any</strong> or
+        <li><span class="step-num">3</span>Click the dropdown ï¿½ currently shows <strong>Any</strong> or
           <strong>Open</strong></li>
         <li><span class="step-num">4</span>Select <strong>Paid</strong> only</li>
         <li><span class="step-num">5</span>Click <strong>Save</strong></li>
@@ -587,57 +175,57 @@
       <div class="screenshot-wrap">
         <img
           src="assets/images/starshipit/status-to-import-paid.png"
-          alt="Starshipit — Status to import showing Paid selected">
+          alt="Starshipit ï¿½ Status to import showing Paid selected">
       </div>
-      <p class="screenshot-caption">Shopify Settings → Status to import → Select 'Paid' only (highlighted in red)</p>
+      <p class="screenshot-caption">Shopify Settings ? Status to import ? Select 'Paid' only (highlighted in red)</p>
 
       <div class="callout note">
-        <span class="callout-icon">📝</span>
+        <span class="callout-icon">??</span>
         <div>With <strong>Paid only</strong> selected, Starshipit will completely ignore any order with
-          <code>Authorized</code> payment status — giving you a clean, uninterrupted window to edit the order in Account
+          <code>Authorized</code> payment status ï¿½ giving you a clean, uninterrupted window to edit the order in Account
           Editor before capturing payment.</div>
       </div>
     </div>
 
-    <!-- STEP 6 — Workflow -->
+    <!-- STEP 6 ï¿½ Workflow -->
     <div class="step-card">
-      <div class="step-card-header">✏️ Step 6 — Edit Order in Account Editor, Then Capture Payment</div>
-      <div class="step-card-sub">✅ Your Workflow (Every Order)</div>
+      <div class="step-card-header">?? Step 6 ï¿½ Edit Order in Account Editor, Then Capture Payment</div>
+      <div class="step-card-sub">? Your Workflow (Every Order)</div>
       <p>Once setup is complete, follow this workflow for every order going forward:</p>
       <ol class="steps-list">
-        <li><span class="step-num">1</span>New order arrives → Payment = <strong>Authorized</strong> <em>(Starshipit
-            skips it ✅)</em></li>
-        <li><span class="step-num">2</span>Open order in <strong>Account Editor</strong> — add or remove items freely
+        <li><span class="step-num">1</span>New order arrives ? Payment = <strong>Authorized</strong> <em>(Starshipit
+            skips it ?)</em></li>
+        <li><span class="step-num">2</span>Open order in <strong>Account Editor</strong> ï¿½ add or remove items freely
         </li>
         <li><span class="step-num">3</span><strong>Save / commit</strong> your edits in Account Editor</li>
-        <li><span class="step-num">4</span>Go to <strong>Shopify Admin</strong> → open order → click <strong>Capture
+        <li><span class="step-num">4</span>Go to <strong>Shopify Admin</strong> ? open order ? click <strong>Capture
             Payment</strong></li>
-        <li><span class="step-num">5</span>Payment becomes <strong>Paid</strong> → Starshipit imports the final correct
-          order ✅</li>
+        <li><span class="step-num">5</span>Payment becomes <strong>Paid</strong> ? Starshipit imports the final correct
+          order ?</li>
       </ol>
 
       <div style="border-top:1px solid #eee;margin:16px 0"></div>
-      <div class="step-card-sub" style="margin-bottom:10px">🔄 What Happens After This Setup</div>
+      <div class="step-card-sub" style="margin-bottom:10px">?? What Happens After This Setup</div>
       <ul class="check-list">
-        <li><span class="chk">✅</span>Correct order total — removed items not counted</li>
-        <li><span class="chk">✅</span>Added items appear correctly in Starshipit</li>
-        <li><span class="chk">✅</span>Quantity changes reflected instantly</li>
-        <li><span class="chk">✅</span>Shipping method updates supported</li>
-        <li><span class="chk">✅</span>If you edit after import (before dispatch) — Starshipit auto re-imports the
+        <li><span class="chk">?</span>Correct order total ï¿½ removed items not counted</li>
+        <li><span class="chk">?</span>Added items appear correctly in Starshipit</li>
+        <li><span class="chk">?</span>Quantity changes reflected instantly</li>
+        <li><span class="chk">?</span>Shipping method updates supported</li>
+        <li><span class="chk">?</span>If you edit after import (before dispatch) ï¿½ Starshipit auto re-imports the
           updated order</li>
       </ul>
 
       <div class="callout success">
-        <span class="callout-icon">✅</span>
+        <span class="callout-icon">?</span>
         <div><strong>Setup complete!</strong> Starshipit will always receive the final, correctly edited order. Unlike
           other WMS apps, even post-import edits sync automatically before dispatch.</div>
       </div>
     </div>
 
-    <!-- Automation — Shopify Flow Automation -->
+    <!-- Automation ï¿½ Shopify Flow Automation -->
     <div class="step-card">
-      <div class="step-card-header">⚡  — Automate Payment Capture with Shopify Flow</div>
-      <div class="step-card-sub">🔄 Optional Automation to Streamline Your Workflow</div>
+      <div class="step-card-header">?  ï¿½ Automate Payment Capture with Shopify Flow</div>
+      <div class="step-card-sub">?? Optional Automation to Streamline Your Workflow</div>
       <p>Instead of manually capturing payment on every order, set up a <strong>Shopify Flow</strong> automation to manage capture while giving you a short review window for normal Online Store orders.</p>
 
       <div class="flow-card">
@@ -647,35 +235,35 @@
         </div>
 
         <div class="flow-step">
-          <div class="flow-step-heading"><span class="flow-step-num">2</span>Condition 1 — Sales Channel Check</div>
+          <div class="flow-step-heading"><span class="flow-step-num">2</span>Condition 1 ï¿½ Sales Channel Check</div>
           <p>The flow checks whether the order came from the <strong>Online Store</strong>.</p>
           <ul>
-            <li>If <strong>NOT from Online Store</strong> (for example, POS or draft order) → capture payment immediately.</li>
-            <li>If from Online Store → continue to the next check.</li>
+            <li>If <strong>NOT from Online Store</strong> (for example, POS or draft order) ? capture payment immediately.</li>
+            <li>If from Online Store ? continue to the next check.</li>
           </ul>
         </div>
 
         <div class="flow-step">
-          <div class="flow-step-heading"><span class="flow-step-num">3</span>Condition 2 — Fraud Risk Check</div>
-          <p>Shopify’s fraud analysis checks the order risk level.</p>
+          <div class="flow-step-heading"><span class="flow-step-num">3</span>Condition 2 ï¿½ Fraud Risk Check</div>
+          <p>Shopifyï¿½s fraud analysis checks the order risk level.</p>
           <ul>
-            <li>If risk level is <strong>HIGH</strong> → capture payment immediately (review these orders manually).</li>
-            <li>If risk is not HIGH → continue to the next check.</li>
+            <li>If risk level is <strong>HIGH</strong> ? capture payment immediately (review these orders manually).</li>
+            <li>If risk is not HIGH ? continue to the next check.</li>
           </ul>
         </div>
 
         <div class="flow-step">
-          <div class="flow-step-heading"><span class="flow-step-num">4</span>Condition 3 — Restricted Tag Check</div>
+          <div class="flow-step-heading"><span class="flow-step-num">4</span>Condition 3 ï¿½ Restricted Tag Check</div>
           <p>The flow checks whether the order is tagged <code>restricted</code>.</p>
           <ul>
-            <li>If tagged <strong>"restricted"</strong> → capture payment immediately.</li>
-            <li>If not restricted → wait 15 minutes, then capture payment.</li>
+            <li>If tagged <strong>"restricted"</strong> ? capture payment immediately.</li>
+            <li>If not restricted ? wait 15 minutes, then capture payment.</li>
           </ul>
         </div>
       </div>
 
       <div style="border-top:1px solid #eee;margin:16px 0"></div>
-      <div class="step-card-sub" style="margin-bottom:10px">📋 Summary</div>
+      <div class="step-card-sub" style="margin-bottom:10px">?? Summary</div>
       <table class="report-table">
         <thead>
           <tr>
@@ -704,12 +292,12 @@
       </table>
 
       <div style="text-align:center;margin:20px 0">
-        <a href="#" class="button-primary" onclick="alert('This will redirect to the Shopify Flow installation page for your store.'); return false;">⚡ Install Flow to Your Store</a>
+        <a href="#" class="button-primary" onclick="alert('This will redirect to the Shopify Flow installation page for your store.'); return false;">? Install Flow to Your Store</a>
         <p style="margin-top:10px;font-size:13px;color:#64748b;max-width:540px;margin-left:auto;margin-right:auto">Click to install the pre-built payment capture automation into your Shopify store</p>
       </div>
 
       <div class="callout success">
-        <span class="callout-icon">💡</span>
+        <span class="callout-icon">??</span>
         <div><strong>Why the 15-minute delay?</strong> The wait gives you a short window to review normal, low-risk Online Store orders before payment is finalized. This helps with last-minute cancellations or manual edits in Account Editor before Starshipit imports the order.</div>
       </div>
     </div>
@@ -717,7 +305,7 @@
     <hr class="divider">
 
     <!-- COMMON ISSUES -->
-    <div class="section-heading"><span>⚠️</span> Common Issues &amp; Fixes</div>
+    <div class="section-heading"><span>??</span> Common Issues &amp; Fixes</div>
     <table class="report-table">
       <thead>
         <tr>
@@ -735,12 +323,12 @@
         <tr>
           <td>Orders not appearing after payment capture</td>
           <td>Auto import disabled</td>
-          <td>Settings → Integrations → check "Automatically import orders from all integrations"</td>
+          <td>Settings ? Integrations ? check "Automatically import orders from all integrations"</td>
         </tr>
         <tr>
           <td>Edited order not updating in Starshipit</td>
           <td>Order already dispatched</td>
-          <td>Always edit before dispatch — edits sync automatically only for undispatched orders</td>
+          <td>Always edit before dispatch ï¿½ edits sync automatically only for undispatched orders</td>
         </tr>
         <tr>
           <td>Authorization expired before capture</td>
@@ -750,7 +338,7 @@
         <tr>
           <td>Connection test fails on setup</td>
           <td>Wrong shop name or permissions not granted</td>
-          <td>Re-enter shop name exactly as shown in your Shopify URL → click Authorize again</td>
+          <td>Re-enter shop name exactly as shown in your Shopify URL ? click Authorize again</td>
         </tr>
       </tbody>
     </table>
@@ -758,12 +346,12 @@
     <hr class="divider">
 
     <!-- BEST PRACTICES -->
-    <div class="section-heading"><span>🧠</span> Best Practices</div>
+    <div class="section-heading"><span>??</span> Best Practices</div>
     <ul class="bullet-list">
-      <li>Always set <strong>Status to import = Paid only</strong> — never leave it as Open or Any</li>
+      <li>Always set <strong>Status to import = Paid only</strong> ï¿½ never leave it as Open or Any</li>
       <li>Use <strong>Enhanced</strong> integration version for best Shopify compatibility</li>
       <li>Edit orders in Account Editor <strong>before capturing payment</strong> for the cleanest workflow</li>
-      <li>Even post-import edits work in Starshipit — but always edit before dispatch to avoid label reprinting</li>
+      <li>Even post-import edits work in Starshipit ï¿½ but always edit before dispatch to avoid label reprinting</li>
       <li>Enable <strong>"Automatically import orders"</strong> in Import Settings for orders to sync every 20 minutes
       </li>
     </ul>
@@ -771,20 +359,24 @@
     <hr class="divider">
 
     <!-- NEED HELP -->
-    <div class="section-heading"><span>🆘</span> Need Help?</div>
+    <div class="section-heading"><span>??</span> Need Help?</div>
     <p>If orders still don't sync correctly after following this guide, contact Account Editor Support and share:</p>
     <ul class="check-list">
-      <li><span class="chk">•</span>Your store URL</li>
-      <li><span class="chk">•</span>Screenshot of Starshipit → Integrations → Shopify Settings</li>
-      <li><span class="chk">•</span>Screenshot of Shopify payment capture setting</li>
-      <li><span class="chk">•</span>The affected order number</li>
+      <li><span class="chk">ï¿½</span>Your store URL</li>
+      <li><span class="chk">ï¿½</span>Screenshot of Starshipit ? Integrations ? Shopify Settings</li>
+      <li><span class="chk">ï¿½</span>Screenshot of Shopify payment capture setting</li>
+      <li><span class="chk">ï¿½</span>The affected order number</li>
     </ul>
 
     <div class="footer">
-      Last updated: April 2026 &nbsp;•&nbsp; Account Editor Help Center &nbsp;•&nbsp; support@accounteditor.com
+      Last updated: April 2026 &nbsp;ï¿½&nbsp; Account Editor Help Center &nbsp;ï¿½&nbsp; support@accounteditor.com
     </div>
 
   </div>
 </body>
 
 </html>
+
+
+
+

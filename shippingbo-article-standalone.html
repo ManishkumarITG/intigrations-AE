@@ -1,477 +1,65 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Shippingbo Integration — Account Editor Help Center</title>
-<style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f7f8fa;
-      color: #1a1a2e;
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .page-wrap {
-      max-width: 820px;
-      margin: 0 auto;
-      padding: 40px 24px 80px;
-    }
-
-    .breadcrumb {
-      font-size: 13px;
-      color: #888;
-      margin-bottom: 28px;
-    }
-
-    .breadcrumb a {
-      color: #2563eb;
-      text-decoration: none;
-    }
-
-    .breadcrumb a:hover {
-      text-decoration: underline;
-    }
-
-    .breadcrumb span {
-      margin: 0 6px;
-    }
-
-    .article-title {
-      font-size: 26px;
-      font-weight: 700;
-      color: #111;
-      line-height: 1.3;
-      margin-bottom: 6px;
-    }
-
-    .article-meta {
-      font-size: 13px;
-      color: #667085;
-      margin-bottom: 28px;
-    }
-
-    .section-heading {
-      font-size: 17px;
-      font-weight: 700;
-      color: #111;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin: 32px 0 10px;
-    }
-
-    .section-heading .icon {
-      font-size: 18px;
-    }
-
-    .sub-heading {
-      font-size: 15px;
-      font-weight: 700;
-      color: #111;
-      margin: 20px 0 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    p {
-      margin-bottom: 12px;
-      color: #333;
-    }
-
-    .steps-list {
-      list-style: none;
-      margin: 12px 0 16px;
-      padding: 0;
-    }
-
-    .steps-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 12px;
-      font-size: 15px;
-      color: #222;
-      line-height: 1.6;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: #f8fbff;
-      border: 1px solid #e2e8f0;
-    }
-
-    .step-num {
-      width: 26px;
-      height: 26px;
-      min-width: 26px;
-      border-radius: 50%;
-      background: #1f2937;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 2px;
-    }
-
-    .bullet-list {
-      list-style: none;
-      margin: 10px 0 16px;
-      padding: 0;
-    }
-
-    .bullet-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-size: 15px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    .bullet-list li::before {
-      content: "\2022";
-      color: #555;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .check-list {
-      list-style: none;
-      margin: 10px 0 16px;
-      padding: 0;
-    }
-
-    .check-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      margin-bottom: 8px;
-      font-size: 15px;
-      color: #333;
-      line-height: 1.5;
-    }
-
-    .check-list li .chk {
-      width: 24px;
-      height: 24px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: #d1fae5;
-      color: #065f46;
-      font-size: 15px;
-      flex-shrink: 0;
-      margin-top: 0;
-    }
-
-    .callout {
-      border-radius: 8px;
-      padding: 14px 16px;
-      margin: 16px 0;
-      font-size: 14px;
-      line-height: 1.6;
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-    }
-
-    .callout-icon {
-      font-size: 16px;
-      flex-shrink: 0;
-      margin-top: 1px;
-    }
-
-    .callout.warning {
-      background: #fff8e1;
-      border-left: 3px solid #f59e0b;
-    }
-
-    .callout.note {
-      background: #eff6ff;
-      border-left: 3px solid #3b82f6;
-    }
-
-    .callout.success {
-      background: #f0fdf4;
-      border-left: 3px solid #22c55e;
-    }
-
-    .callout strong {
-      font-weight: 700;
-    }
-
-    .screenshot-wrap {
-      border: 1px solid #e0e3e8;
-      border-radius: 10px;
-      overflow: hidden;
-      margin: 16px 0 6px;
-      background: #fff;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    }
-
-    .screenshot-wrap img {
-      width: 100%;
-      display: block;
-    }
-
-    .screenshot-caption {
-      font-size: 13px;
-      color: #64748b;
-      text-align: center;
-      margin-bottom: 20px;
-      font-style: italic;
-    }
-
-    .step-card {
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 16px;
-      padding: 24px 26px;
-      margin: 24px 0 0;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
-    }
-
-    .step-card-header {
-      font-size: 18px;
-      font-weight: 800;
-      color: #111827;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 8px;
-    }
-
-    .step-card-sub {
-      font-size: 14px;
-      font-weight: 600;
-      color: #475569;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 16px;
-    }
-
-    .flow-card {
-      background: #f8fafc;
-      border: 1px solid #dbeafe;
-      border-radius: 16px;
-      padding: 20px 22px;
-      margin: 18px 0 0;
-    }
-
-    .flow-step {
-      padding: 18px 18px 14px;
-      margin-bottom: 16px;
-      border-radius: 14px;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-    }
-
-    .flow-step:last-child {
-      margin-bottom: 0;
-    }
-
-    .flow-step-heading {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      margin-bottom: 10px;
-      font-weight: 700;
-      color: #111827;
-      font-size: 15px;
-    }
-
-    .flow-step-num {
-      width: 30px;
-      height: 30px;
-      min-width: 30px;
-      border-radius: 50%;
-      background: #1f2937;
-      color: #fff;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      margin-top: 2px;
-    }
-
-    .flow-step p {
-      margin: 0;
-      color: #334155;
-      line-height: 1.7;
-    }
-
-    .flow-step ul {
-      margin: 10px 0 0 28px;
-      padding: 0;
-      list-style: disc;
-      color: #334155;
-      line-height: 1.7;
-    }
-
-    .flow-step ul li {
-      margin-bottom: 8px;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #e5e7eb;
-      margin: 32px 0;
-    }
-
-    code {
-      background: #f1f3f6;
-      border: 1px solid #dde1e7;
-      border-radius: 4px;
-      padding: 1px 6px;
-      font-family: "SF Mono", Monaco, monospace;
-      font-size: 13px;
-      color: #c7254e;
-    }
-
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      background: #eef2ff;
-      border: 1px solid #c7d2fe;
-      border-radius: 8px;
-      padding: 4px 10px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #3730a3;
-      font-family: "SF Mono", Monaco, monospace;
-      margin: 2px 5px 2px 0;
-    }
-
-    .button,
-    .button-primary {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: #2563eb;
-      color: #fff;
-      padding: 12px 22px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 700;
-      transition: background 0.2s ease;
-      border: 1px solid transparent;
-    }
-
-    .button-primary:hover {
-      background: #1d4ed8;
-    }
-
-    .summary-table,
-    .report-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 18px 0 24px;
-      font-size: 14px;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-    }
-
-    .summary-table th,
-    .report-table th {
-      background: #eef2ff;
-      color: #0f172a;
-      padding: 12px 14px;
-      text-align: left;
-      font-weight: 700;
-      font-size: 14px;
-      border-bottom: 1px solid #e2e8f0;
-    }
-
-    .summary-table td,
-    .report-table td {
-      padding: 12px 14px;
-      border-bottom: 1px solid #e5e7eb;
-      vertical-align: top;
-      color: #334155;
-      font-size: 14px;
-      line-height: 1.7;
-    }
-
-    .summary-table tbody tr:nth-child(even) td,
-    .report-table tr:nth-child(even) td {
-      background: #f8fafc;
-    }
-
-    .footer {
-      margin-top: 48px;
-      padding-top: 20px;
-      border-top: 1px solid #e5e7eb;
-      font-size: 13px;
-      color: #aaa;
-      text-align: center;
-    }
-
-    @media print {
-      body { background: #fff; }
-      .page-wrap { padding: 0; }
-    }
-  </style>
+<title>Shippingbo Integration ï¿½ Account Editor Help Center</title>
+  <link rel="stylesheet" href="assets/styles/help-center-docs.css">
 </head>
 <body>
-<div class="page-wrap">
+  <header class="dummy-topnav" aria-label="Help center navigation">
+    <div class="dummy-topnav-inner">
+      <div class="dummy-brand">account<small>EDITOR</small></div>
+      <input class="dummy-search" type="text" placeholder="Search our help center..." aria-label="Search" />
+      <a href="#" class="dummy-topnav-btn">Go to website</a>
+    </div>
+  </header>
+
+  <div class="page-wrap">
 
   <!-- Breadcrumb -->
   <div class="breadcrumb">
     <a href="#">Account Editor Help Center</a>
-    <span>›</span>
+    <span>ï¿½</span>
     <a href="#">3PL Integrations</a>
   </div>
 
   <!-- Title -->
-  <h1 class="article-title">Shippingbo Integration — Shopify Edited Order Sync (Account Editor)</h1>
-  <div class="article-meta">3PL Integrations &nbsp;•&nbsp; Last updated: April 2026</div>
+  <h1 class="article-title">Shippingbo Integration ï¿½ Shopify Edited Order Sync (Account Editor)</h1>
+  <div class="article-meta">3PL Integrations &nbsp;ï¿½&nbsp; Last updated: April 2026</div>
 
-  <!-- ══ STEP 1 ══════════════════════════════════════════════════════════ -->
+  <!-- -- STEP 1 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      📋 Required Setup — Enable Manual Payment Capture in Shopify
+      ?? Required Setup ï¿½ Enable Manual Payment Capture in Shopify
     </div>
     <div class="step-card-sub">
-      ✅ Step-by-Step Configuration
+      ? Step-by-Step Configuration
     </div>
 
     <ol class="steps-list">
       <li><span class="step-num">1</span> Log in to <strong>Shopify Admin</strong></li>
-      <li><span class="step-num">2</span> Go to <strong>Settings → Payments</strong></li>
+      <li><span class="step-num">2</span> Go to <strong>Settings ? Payments</strong></li>
       <li><span class="step-num">3</span> Scroll down to the <strong>Payment capture</strong> section</li>
       <li><span class="step-num">4</span> Select <strong>"Manually capture payment for orders"</strong></li>
       <li><span class="step-num">5</span> Click <strong>Save</strong></li>
     </ol>
 
     <div class="callout warning">
-      <span class="callout-icon">⚠️</span>
-      <div><strong>Important:</strong> Payment authorizations expire after <strong>7 days</strong> (Shopify Payments). Always capture payment within this window — or the authorization will lapse and you won't receive payment for the order.</div>
+      <span class="callout-icon">??</span>
+      <div><strong>Important:</strong> Payment authorizations expire after <strong>7 days</strong> (Shopify Payments). Always capture payment within this window ï¿½ or the authorization will lapse and you won't receive payment for the order.</div>
     </div>
   </div>
 
   <hr class="divider">
 
-  <!-- ══ STEP 2 ══════════════════════════════════════════════════════════ -->
+  <!-- -- STEP 2 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      🔌 Open Connectors in Shippingbo
+      ?? Open Connectors in Shippingbo
     </div>
     <div class="step-card-sub">
-      ✅ Step-by-Step Configuration
+      ? Step-by-Step Configuration
     </div>
 
     <ol class="steps-list">
@@ -480,20 +68,20 @@
     </ol>
 
     <div class="screenshot-wrap">
-      <img src="assets/images/shippingbo/dashboard-connectors-sidebar.png" alt="Shippingbo Dashboard — Connectors highlighted in left sidebar">
+      <img src="assets/images/shippingbo/dashboard-connectors-sidebar.png" alt="Shippingbo Dashboard ï¿½ Connectors highlighted in left sidebar">
     </div>
-    <p class="screenshot-caption">Shippingbo Dashboard — Click 'Connectors' in the left sidebar (highlighted in red)</p>
+    <p class="screenshot-caption">Shippingbo Dashboard ï¿½ Click 'Connectors' in the left sidebar (highlighted in red)</p>
   </div>
 
   <hr class="divider">
 
-  <!-- ══ STEP 3 ══════════════════════════════════════════════════════════ -->
+  <!-- -- STEP 3 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      🛍️ Open Your Shopify Connector Settings
+      ??? Open Your Shopify Connector Settings
     </div>
     <div class="step-card-sub">
-      ✅ Step-by-Step Configuration
+      ? Step-by-Step Configuration
     </div>
 
     <ol class="steps-list">
@@ -502,30 +90,30 @@
     </ol>
 
     <div class="screenshot-wrap">
-      <img src="assets/images/shippingbo/shopify.png" alt="My Connectors — Shopify block highlighted">
+      <img src="assets/images/shippingbo/shopify.png" alt="My Connectors ï¿½ Shopify block highlighted">
     </div>
-    <p class="screenshot-caption">My Connectors — Click your Shopify store block (highlighted in red)</p>
+    <p class="screenshot-caption">My Connectors ï¿½ Click your Shopify store block (highlighted in red)</p>
   </div>
 
   <hr class="divider">
 
-  <!-- ══ STEP 4 ══════════════════════════════════════════════════════════ -->
+  <!-- -- STEP 4 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ⚙️ Set the Exclusion Rules
+      ?? Set the Exclusion Rules
     </div>
     <div class="step-card-sub">
-      ✅ Step-by-Step Configuration
+      ? Step-by-Step Configuration
     </div>
 
     <ol class="steps-list">
       <li><span class="step-num">1</span> Inside connector settings, scroll down to the <strong>Orders retrieving</strong> section</li>
-      <li><span class="step-num">2</span> Find <strong>"Exclude by payment status"</strong> — add these tags:
+      <li><span class="step-num">2</span> Find <strong>"Exclude by payment status"</strong> ï¿½ add these tags:
         <br><br>
         <span class="tag">authorized</span>
         <span class="tag">partially_paid</span>
       </li>
-      <li><span class="step-num">3</span> Find <strong>"Exclude by order status"</strong> — add these tags:
+      <li><span class="step-num">3</span> Find <strong>"Exclude by order status"</strong> ï¿½ add these tags:
         <br><br>
         <span class="tag">on-hold</span>
         <span class="tag">on_hold</span>
@@ -534,64 +122,64 @@
     </ol>
 
     <div class="screenshot-wrap">
-      <img src="assets/images/shippingbo/connector-settings-fields.png" alt="Connector Settings — Exclude payment and order status fields highlighted">
+      <img src="assets/images/shippingbo/connector-settings-fields.png" alt="Connector Settings ï¿½ Exclude payment and order status fields highlighted">
     </div>
-    <p class="screenshot-caption">Connector Settings — Add exclusion tags in both fields as shown (highlighted in red)</p>
+    <p class="screenshot-caption">Connector Settings ï¿½ Add exclusion tags in both fields as shown (highlighted in red)</p>
 
     <div class="callout note">
-      <span class="callout-icon">📝</span>
+      <span class="callout-icon">??</span>
       <div>The value <code>authorized</code> corresponds to Shopify's <code>financial_status</code> field. Shippingbo will skip these orders entirely until payment is captured and status becomes <strong>Paid</strong>.</div>
     </div>
   </div>
 
   <hr class="divider">
 
-  <!-- ══ STEP 5 ══════════════════════════════════════════════════════════ -->
+  <!-- -- STEP 5 ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ✏️ Edit the Order, Then Capture Payment
+      ?? Edit the Order, Then Capture Payment
     </div>
     <div class="step-card-sub">
-      ✅ Your New Workflow (Every Order)
+      ? Your New Workflow (Every Order)
     </div>
 
     <ol class="steps-list">
-      <li><span class="step-num">1</span> New order arrives → Payment = <strong>Authorized</strong> <em>(Shippingbo skips it ✅)</em></li>
-      <li><span class="step-num">2</span> Open the order in <strong>Account Editor</strong> — add or remove items freely</li>
+      <li><span class="step-num">1</span> New order arrives ? Payment = <strong>Authorized</strong> <em>(Shippingbo skips it ?)</em></li>
+      <li><span class="step-num">2</span> Open the order in <strong>Account Editor</strong> ï¿½ add or remove items freely</li>
       <li><span class="step-num">3</span> <strong>Save / commit</strong> your edits</li>
-      <li><span class="step-num">4</span> Go to <strong>Shopify Admin</strong> → open the order → click <strong>Capture Payment</strong></li>
-      <li><span class="step-num">5</span> Payment becomes <strong>Paid</strong> → Shippingbo downloads the final correct order ✅</li>
+      <li><span class="step-num">4</span> Go to <strong>Shopify Admin</strong> ? open the order ? click <strong>Capture Payment</strong></li>
+      <li><span class="step-num">5</span> Payment becomes <strong>Paid</strong> ? Shippingbo downloads the final correct order ?</li>
     </ol>
 
     <hr style="border:none;border-top:1px solid #eee;margin:16px 0">
 
     <div class="section-heading" style="margin-top:12px">
-      <span class="icon">🔄</span> What Happens After This Setup
+      <span class="icon">??</span> What Happens After This Setup
     </div>
     <p style="margin-bottom:10px">Once configured, Shippingbo will always receive the final edited order:</p>
     <ul class="check-list">
-      <li><span class="chk">✅</span> Correct order total (removed items not counted)</li>
-      <li><span class="chk">✅</span> Added items appear correctly</li>
-      <li><span class="chk">✅</span> Removed items are excluded from total</li>
-      <li><span class="chk">✅</span> Quantity changes respected</li>
-      <li><span class="chk">✅</span> No manual correction needed in Shippingbo</li>
+      <li><span class="chk">?</span> Correct order total (removed items not counted)</li>
+      <li><span class="chk">?</span> Added items appear correctly</li>
+      <li><span class="chk">?</span> Removed items are excluded from total</li>
+      <li><span class="chk">?</span> Quantity changes respected</li>
+      <li><span class="chk">?</span> No manual correction needed in Shippingbo</li>
     </ul>
 
     <div class="callout success">
-      <span class="callout-icon">✅</span>
+      <span class="callout-icon">?</span>
       <div><strong>Setup complete!</strong> Shippingbo will always receive the final, correctly edited order from now on.</div>
     </div>
   </div>
 
   <hr class="divider">
 
-  <!-- ══  Automation ══════════════════════════════════════════════════════════ -->
+  <!-- --  Automation ---------------------------------------------------------- -->
   <div class="step-card">
     <div class="step-card-header">
-      ⚡ — Automate Payment Capture with Shopify Flow
+      ? ï¿½ Automate Payment Capture with Shopify Flow
     </div>
     <div class="step-card-sub">
-      🔄 Optional Automation to Streamline Your Workflow
+      ?? Optional Automation to Streamline Your Workflow
     </div>
 
     <p>Instead of manually capturing payment on every order, set up a Shopify Flow automation to manage capture while keeping a review window for normal Online Store orders.</p>
@@ -603,35 +191,35 @@
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">2</span>Condition 1 — Sales Channel Check</div>
+        <div class="flow-step-heading"><span class="flow-step-num">2</span>Condition 1 ï¿½ Sales Channel Check</div>
         <p>The flow checks whether the order came from the <strong>Online Store</strong>.</p>
         <ul>
-          <li>If <strong>NOT from Online Store</strong> (for example, POS or draft order) → capture payment immediately.</li>
-          <li>If from Online Store → continue to the next check.</li>
+          <li>If <strong>NOT from Online Store</strong> (for example, POS or draft order) ? capture payment immediately.</li>
+          <li>If from Online Store ? continue to the next check.</li>
         </ul>
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">3</span>Condition 2 — Fraud Risk Check</div>
-        <p>Shopify’s fraud analysis checks the order risk level.</p>
+        <div class="flow-step-heading"><span class="flow-step-num">3</span>Condition 2 ï¿½ Fraud Risk Check</div>
+        <p>Shopifyï¿½s fraud analysis checks the order risk level.</p>
         <ul>
-          <li>If risk level is <strong>HIGH</strong> → capture payment immediately (review these orders manually).</li>
-          <li>If risk is not HIGH → continue to the next check.</li>
+          <li>If risk level is <strong>HIGH</strong> ? capture payment immediately (review these orders manually).</li>
+          <li>If risk is not HIGH ? continue to the next check.</li>
         </ul>
       </div>
 
       <div class="flow-step">
-        <div class="flow-step-heading"><span class="flow-step-num">4</span>Condition 3 — Restricted Tag Check</div>
+        <div class="flow-step-heading"><span class="flow-step-num">4</span>Condition 3 ï¿½ Restricted Tag Check</div>
         <p>The flow checks whether the order is tagged <code>restricted</code>.</p>
         <ul>
-          <li>If tagged <strong>"restricted"</strong> → capture payment immediately.</li>
-          <li>If not restricted → wait 15 minutes, then capture payment.</li>
+          <li>If tagged <strong>"restricted"</strong> ? capture payment immediately.</li>
+          <li>If not restricted ? wait 15 minutes, then capture payment.</li>
         </ul>
       </div>
     </div>
 
     <div class="section-heading">
-      <span class="icon">📋</span> Summary
+      <span class="icon">??</span> Summary
     </div>
 
     <table class="summary-table">
@@ -662,7 +250,7 @@
     </table>
 
     <div class="section-heading">
-      <span class="icon">⚡</span> Install Flow to Your Store
+      <span class="icon">?</span> Install Flow to Your Store
     </div>
 
     <p>Click to install the pre-built payment capture automation into your Shopify store.</p>
@@ -670,16 +258,21 @@
     <a href="#" class="button-primary">Install Flow</a>
 
     <div class="callout note">
-      <span class="callout-icon">💡</span>
+      <span class="callout-icon">??</span>
       <div><strong>Why the 15-minute delay?</strong> The wait gives you a short window to review normal, low-risk Online Store orders before payment is finalized. This helps with last-minute cancellations or manual edits in Account Editor before Shippingbo imports the order.</div>
     </div>
   </div>
 
   <!-- Footer -->
   <div class="footer">
-    Last updated: April 2026 &nbsp;•&nbsp; Account Editor Help Center &nbsp;•&nbsp; support@accounteditor.com
+    Last updated: April 2026 &nbsp;ï¿½&nbsp; Account Editor Help Center &nbsp;ï¿½&nbsp; support@accounteditor.com
   </div>
 
 </div>
 </body>
 </html>
+
+
+
+
+
